@@ -23,12 +23,6 @@ jobs:
     - name: Build
       run: npm run build
     
-    # - name: Connect to Tailscale
-    #   uses: tailscale/github-action@v2
-    #   with:
-    #     auth-key: ${{ secrets.TAILSCALE_AUTH_KEY }}
-    #     socket: true
-    
     - name: Deploy to NUC
       uses: appleboy/ssh-action@master
       with:
@@ -44,21 +38,39 @@ jobs:
           if [ ! -d ~/nextfolio/.git ]; then
             # Remove any existing files
             rm -rf ~/nextfolio/*
-            # Clone the repository
-            git clone https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
+            
+            # Configure git to use the SSH key for GitHub
+            echo "Cloning repository..."
+            GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no" git clone git@github.com:JakeMalmrose/nextfolio.git ~/nextfolio
+            
+            # Check if clone was successful
+            if [ $? -ne 0 ]; then
+              echo "Failed to clone repository"
+              exit 1
+            fi
           fi
           
           # Navigate to the project directory
-          cd ~/nextfolio
+          cd ~/nextfolio || { echo "Failed to change to nextfolio directory"; exit 1; }
           
           # Pull the latest changes
-          git pull
+          echo "Pulling latest changes..."
+          git pull || { echo "Failed to pull latest changes"; exit 1; }
           
           # Install dependencies
-          npm ci
+          echo "Installing dependencies..."
+          npm ci || npm install
+          
+          # Check if npm install was successful
+          if [ $? -ne 0 ]; then
+            echo "Failed to install dependencies"
+            exit 1
+          fi
           
           # Build the application
-          npm run build
+          echo "Building application..."
+          npm run build || { echo "Failed to build application"; exit 1; }
           
           # Start or restart the application with PM2
+          echo "Starting/restarting application with PM2..."
           pm2 restart nextfolio || pm2 start npm --name "nextfolio" -- start
