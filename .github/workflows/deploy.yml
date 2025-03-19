@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # Add an explicit timeout
+    timeout-minutes: 15
     
     steps:
     - uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Deploy to NUC via SCP and SSH
+    - name: Deploy to NUC via SSH
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -32,52 +32,42 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          # Print system info for debugging
-          echo "=== System Information ==="
-          df -h
-          free -h
-          echo "=========================="
-          
           # Create the directory if it doesn't exist
           mkdir -p ~/nextfolio
           
           # Check if repository already exists, remove it if it does
           if [ -d ~/nextfolio/.git ]; then
-            echo "Removing existing repository..."
-            rm -rf ~/nextfolio
-            mkdir -p ~/nextfolio
+            echo "Repository exists, pulling latest changes..."
+            cd ~/nextfolio
+            git pull
+          else
+            echo "Cloning repository..."
+            # Clone without verbose output to reduce log size
+            git clone https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
+            
+            # Don't check exit code of git clone - it returns 0 on success
+            cd ~/nextfolio
           fi
-          
-          # Clone with verbose output and timeout
-          echo "Starting clone with 5 minute timeout..."
-          timeout 300 git clone --verbose --progress https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
-          
-          # Check clone result
-          if [ $? -eq 124 ]; then
-            echo "Clone operation timed out after 5 minutes"
-            exit 1
-          elif [ $? -ne 0 ]; then
-            echo "Clone failed with error code $?"
-            exit 1
-          fi
-          
-          # Navigate to project directory
-          cd ~/nextfolio || { echo "Failed to change directory"; exit 1; }
           
           # Print repository info
-          echo "=== Repository Information ==="
-          ls -la
-          git status
-          echo "============================="
+          echo "Repository ready, installing dependencies..."
           
-          # Install dependencies with fallback and timeout
-          echo "Installing dependencies..."
-          timeout 300 npm install --no-fund --no-audit --loglevel info || { echo "npm install failed"; exit 1; }
+          # Install dependencies (use yarn if available for better performance)
+          if command -v yarn &> /dev/null; then
+            yarn install
+          else
+            npm install
+          fi
           
-          # Build the application with timeout
+          # Build the application 
           echo "Building application..."
-          timeout 300 npm run build || { echo "Build failed"; exit 1; }
+          npm run build
           
-          # Start or restart with PM2
+          # Start or restart with PM2 - use absolute path
           echo "Starting/restarting with PM2..."
-          pm2 restart nextfolio || pm2 start npm --name "nextfolio" -- start
+          PATH=$PATH:$(npm bin -g)
+          PM2_PATH=$(which pm2)
+          $PM2_PATH restart nextfolio || $PM2_PATH start npm --name "nextfolio" -- start
+          
+          # Print success message at the end to confirm completion
+          echo "Deployment completed successfully!"
