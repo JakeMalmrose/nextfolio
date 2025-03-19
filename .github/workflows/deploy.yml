@@ -1,0 +1,64 @@
+name: Deploy to Ubuntu NUC
+
+on:
+  push:
+    branches: [ main ]  # Adjust if your main branch has a different name (like master)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build
+      run: npm run build
+    
+    - name: Connect to Tailscale
+      uses: tailscale/github-action@v2
+      with:
+        auth-key: ${{ secrets.TAILSCALE_AUTH_KEY }}
+        socket: true
+    
+    - name: Deploy to NUC
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          # Create the directory if it doesn't exist
+          mkdir -p ~/nextfolio
+          
+          # Clone the repository if it doesn't exist yet
+          if [ ! -d ~/nextfolio/.git ]; then
+            # Remove any existing files
+            rm -rf ~/nextfolio/*
+            # Clone the repository
+            git clone https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
+          fi
+          
+          # Navigate to the project directory
+          cd ~/nextfolio
+          
+          # Pull the latest changes
+          git pull
+          
+          # Install dependencies
+          npm ci
+          
+          # Build the application
+          npm run build
+          
+          # Start or restart the application with PM2
+          pm2 restart nextfolio || pm2 start npm --name "nextfolio" -- start
