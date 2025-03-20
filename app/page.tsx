@@ -13,10 +13,10 @@ export default function Home() {
       
       <div className="flex flex-wrap gap-4 justify-center">
         <Link 
-          href="/newsbites"
+          href="/firefly-events"
           className="px-6 py-3 bg-primary text-background font-medium rounded-md hover:opacity-90 transition"
         >
-          View NewsBites
+          View Firefly Events
         </Link>
         
         <Link 

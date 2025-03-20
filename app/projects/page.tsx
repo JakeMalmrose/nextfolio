@@ -66,12 +66,26 @@ const ProjectCard = ({ project }: { project: Project }) => {
 export default function Projects() {
   const [projects] = useState<Project[]>([
     {
+      title: "Firefly Events",
+      date: "JAN 2025 – CURRENT",
+      description: [
+        "Helped build a full stack venue rental platform with the Reserved team.",
+        "Implemented testing framework and created E2E, integration, and unit tests.",
+        "Used Prisma ORM and Clerk to implement fast secure backend endpoints.",
+        "Built pages from scratch including frontend through backend implementation."
+      ],
+      techStack: ["React", "Typescript", "Next.js", "Tailwind", "MongoDB", "Clerk"],
+      links: {
+        demo: "https://reserved.firefly.events/"
+      }
+    },
+    {
       title: "NewsBites",
-      date: "SEP 2024 – CURRENT",
+      date: "SEP 2024 – DEC 2024",
       description: [
         "Built an AI Powered News Summarization Website. Integrated AI tool calling, prompt engineering, and AI driven data transformation.",
         "Used state of the art generative AI models to transform data, and streamline UX.",
-        "Processed 1000's of news articles, extracted key details with ML. Used prompt engineering and prompt caching to reduce latency below 0.5 seconds."
+        "Processed 1000's of news articles, extracted key details with ML. Used prompt engineering and prompt caching to reduce latency below 0.3 seconds."
       ],
       techStack: ["React", "Typescript", "AWS", "Amplify", "Generative AI"],
       links: {

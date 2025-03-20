@@ -77,8 +77,8 @@ export default function NewsBites() {
           NewsBites
         </h1>
         <p className="max-w-2xl mx-auto">
-          AI-powered news summarization platform that delivers concise, informative summaries of today's most important stories.
-          Get the essence of the news without the fluff, with personalized feeds and ultra-fast delivery.
+          AI-powered news summarization platform that delivered concise, informative summaries of important news stories.
+          This project was completed as my senior capstone at Neumont College of Computer Science in December 2024.
         </p>
         <div className="mt-6">
           <a
