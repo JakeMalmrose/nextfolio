@@ -1,19 +1,25 @@
-# Replace yourdomain.com with your actual domain
-# For local testing, you can use localhost
+{
+    # For development/testing - use auto_https off to avoid certificate issues on localhost
+    auto_https off
+}
 
+# Standard HTTP and HTTPS ports
 :80 {
-    # Redirect HTTP to HTTPS
-    redir https://{host}{uri} permanent
+    # Redirect HTTP to HTTPS in production
+    # redir https://{host}{uri} permanent
+    
+    # For development, just proxy directly without redirection
+    reverse_proxy nextjs:3000
 }
 
 :443 {
     # Reverse proxy to Next.js
-    reverse_proxy localhost:3000
+    reverse_proxy nextjs:3000
     
-    # Automatic HTTPS
+    # For development, use self-signed certs
     tls internal
     
-    # For production with a real domain, use:
+    # For production with a real domain, uncomment:
     # tls your-email@example.com
     
     # Logging
@@ -22,7 +28,7 @@
     }
 }
 
-# You can also use this simpler format if you prefer:
-# yourdomain.com {
-#     reverse_proxy localhost:3000
-# }
+# Production configuration (uncomment and replace yourdomain.com when ready):
+malmrose.com {
+    reverse_proxy nextjs:3000
+}
