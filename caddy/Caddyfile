@@ -11,14 +11,14 @@ malmrose.com, www.malmrose.com {
     reverse_proxy nextjs:3000
     
     # Automatic HTTPS with Let's Encrypt
-    tls {
-        # This will issue certificates automatically
-    }
+    # tls {
+    #     # This will issue certificates automatically
+    # }
     
     # Logging
-    log {
-        output file /var/log/caddy/access.log
-    }
+    # log {
+    #     output file /var/log/caddy/access.log
+    # }
 }
 
 # Fallback for IP access - optional but helps during DNS propagation
