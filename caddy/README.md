@@ -1,32 +1,54 @@
 # Caddy Configuration for NextFolio
 
-This directory contains the Caddy configuration for the NextFolio project.
+This directory contains the Caddy server configuration for the NextFolio project.
 
-## Setup
+## Current Setup
 
-1. Modify the `Caddyfile` to use your actual domain name instead of the placeholder.
-2. For production, update the TLS settings to use your email for Let's Encrypt notifications.
+The Caddyfile is configured to:
 
-## Running with Docker Compose
+1. Serve the NextFolio application at malmrose.com and www.malmrose.com
+2. Automatically obtain and renew SSL certificates through Let's Encrypt
+3. Proxy all requests to the Next.js application running in Docker
 
-From the project root, run:
+## Important Notes
 
-```bash
-docker-compose up -d
-```
+- The email address in the Caddyfile is used for Let's Encrypt registration
+- Caddy automatically handles HTTPS certificate issuance and renewal
+- Both the www and non-www versions of the domain are configured
+- The configuration also includes a fallback for direct IP access during DNS propagation
 
-This will start both the Next.js application and Caddy as a reverse proxy.
+## Troubleshooting
 
-## Manual Setup (Without Docker)
+If you encounter issues with the Caddy setup:
 
-If you prefer to run Caddy manually:
+1. Check DNS configuration:
+   ```bash
+   dig malmrose.com
+   dig www.malmrose.com
+   ```
+   
+2. Verify that ports 80 and 443 are open on your server:
+   ```bash
+   sudo netstat -tulpn | grep LISTEN
+   ```
+   
+3. Check Caddy logs:
+   ```bash
+   sudo docker compose logs caddy
+   ```
 
-1. [Download Caddy](https://caddyserver.com/download)
-2. Run it with: `caddy run --config ./caddy/Caddyfile`
+4. For certificate issues, check the Caddy data directory:
+   ```bash
+   sudo docker compose exec caddy caddy validate --config /etc/caddy/Caddyfile
+   ```
 
-Make sure your Next.js application is running on port 3000 (or update the Caddyfile to match your port).
+## Custom Domain Changes
 
-## Managing Caddy
+If you need to change the domain:
 
-- Reload config: `caddy reload --config ./caddy/Caddyfile`
-- Stop Caddy: `caddy stop`
+1. Update the Caddyfile with the new domain name
+2. Update the DOMAIN environment variable in docker-compose.yml
+3. Restart Caddy:
+   ```bash
+   sudo docker compose restart caddy
+   ```

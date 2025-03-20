@@ -1,32 +1,19 @@
+# Global configuration
 {
-    # Global options
-    # Disable automatic HTTPS for IP addresses (needed for IP-based access)
-    auto_https off
+    # Enable automatic HTTPS for domains
+    # email is used for Let's Encrypt account
+    email jake.malmrose@gmail.com
 }
 
-# IP address configuration
-174.23.147.40 {
+# Domain configuration for malmrose.com (both www and non-www)
+malmrose.com, www.malmrose.com {
     # Reverse proxy to Next.js
     reverse_proxy nextjs:3000
     
-    # Log settings
-    log {
-        output file /var/log/caddy/access.log
+    # Automatic HTTPS with Let's Encrypt
+    tls {
+        # This will issue certificates automatically
     }
-}
-
-# Standard HTTP and HTTPS ports (for when domain isn't specified)
-:80 {
-    # Reverse proxy directly to Next.js
-    reverse_proxy nextjs:3000
-}
-
-:443 {
-    # Reverse proxy to Next.js
-    reverse_proxy nextjs:3000
-    
-    # For development/testing with IP, use self-signed certs
-    tls internal
     
     # Logging
     log {
@@ -34,16 +21,8 @@
     }
 }
 
-# Domain configuration (commented out until ready to use)
-# malmrose.com {
-#     # For production domain, enable automatic HTTPS
-#     tls your-email@example.com
-#     
-#     # Reverse proxy to Next.js
-#     reverse_proxy nextjs:3000
-#     
-#     # Logging
-#     log {
-#         output file /var/log/caddy/access.log
-#     }
-# }
+# Fallback for IP access - optional but helps during DNS propagation
+:80 {
+    # Reverse proxy to Next.js
+    reverse_proxy nextjs:3000
+}
