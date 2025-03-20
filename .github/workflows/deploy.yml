@@ -7,22 +7,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build
-      run: npm run build
     
     - name: Deploy to NUC via SSH
       uses: appleboy/ssh-action@master
@@ -44,30 +32,37 @@ jobs:
             echo "Cloning repository..."
             # Clone without verbose output to reduce log size
             git clone https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
-            
-            # Don't check exit code of git clone - it returns 0 on success
             cd ~/nextfolio
           fi
           
           # Print repository info
-          echo "Repository ready, installing dependencies..."
+          echo "Repository ready, deploying with Docker..."
           
-          # Install dependencies (use yarn if available for better performance)
-          if command -v yarn &> /dev/null; then
-            yarn install
-          else
-            npm install
+          # Navigate to project directory
+          cd ~/nextfolio
+          
+          # Check if Docker is installed
+          if ! command -v docker &> /dev/null; then
+            echo "Docker is not installed. Please install Docker first."
+            exit 1
           fi
           
-          # Build the application 
-          echo "Building application..."
-          npm run build
+          # Stop any existing containers and remove them
+          echo "Stopping existing containers..."
+          sudo docker compose down || echo "No containers to stop."
           
-          # Start or restart with PM2 - use absolute path
-          echo "Starting/restarting with PM2..."
-          PATH=$PATH:$(npm bin -g)
-          PM2_PATH=$(which pm2)
-          $PM2_PATH restart nextfolio || $PM2_PATH start npm --name "nextfolio" -- start
+          # Build and start containers in detached mode
+          echo "Building and starting containers..."
+          sudo docker compose build --no-cache
+          sudo docker compose up -d
+          
+          # Check if containers are running
+          echo "Checking container status..."
+          sudo docker compose ps
+          
+          # View recent logs
+          echo "Recent container logs:"
+          sudo docker compose logs --tail=20
           
           # Print success message at the end to confirm completion
           echo "Deployment completed successfully!"
