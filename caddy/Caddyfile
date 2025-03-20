@@ -1,14 +1,23 @@
 {
-    # For development/testing - use auto_https off to avoid certificate issues on localhost
+    # Global options
+    # Disable automatic HTTPS for IP addresses (needed for IP-based access)
     auto_https off
 }
 
-# Standard HTTP and HTTPS ports
-:80 {
-    # Redirect HTTP to HTTPS in production
-    # redir https://{host}{uri} permanent
+# IP address configuration
+174.23.147.40 {
+    # Reverse proxy to Next.js
+    reverse_proxy nextjs:3000
     
-    # For development, just proxy directly without redirection
+    # Log settings
+    log {
+        output file /var/log/caddy/access.log
+    }
+}
+
+# Standard HTTP and HTTPS ports (for when domain isn't specified)
+:80 {
+    # Reverse proxy directly to Next.js
     reverse_proxy nextjs:3000
 }
 
@@ -16,11 +25,8 @@
     # Reverse proxy to Next.js
     reverse_proxy nextjs:3000
     
-    # For development, use self-signed certs
+    # For development/testing with IP, use self-signed certs
     tls internal
-    
-    # For production with a real domain, uncomment:
-    # tls your-email@example.com
     
     # Logging
     log {
@@ -28,7 +34,16 @@
     }
 }
 
-# Production configuration (uncomment and replace yourdomain.com when ready):
-malmrose.com {
-    reverse_proxy nextjs:3000
-}
+# Domain configuration (commented out until ready to use)
+# malmrose.com {
+#     # For production domain, enable automatic HTTPS
+#     tls your-email@example.com
+#     
+#     # Reverse proxy to Next.js
+#     reverse_proxy nextjs:3000
+#     
+#     # Logging
+#     log {
+#         output file /var/log/caddy/access.log
+#     }
+# }
