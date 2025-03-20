@@ -49,20 +49,20 @@ jobs:
           
           # Stop any existing containers and remove them
           echo "Stopping existing containers..."
-          sudo docker compose down || echo "No containers to stop."
+          docker compose down || echo "No containers to stop."
           
           # Build and start containers in detached mode
           echo "Building and starting containers..."
-          sudo docker compose build --no-cache
-          sudo docker compose up -d
+          docker compose build --no-cache
+          docker compose up -d
           
           # Check if containers are running
           echo "Checking container status..."
-          sudo docker compose ps
+          docker compose ps
           
           # View recent logs
           echo "Recent container logs:"
-          sudo docker compose logs --tail=20
+          docker compose logs --tail=20
           
           # Print success message at the end to confirm completion
           echo "Deployment completed successfully!"
