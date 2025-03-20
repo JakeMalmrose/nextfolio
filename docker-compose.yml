@@ -28,9 +28,7 @@ services:
     networks:
       - web
     depends_on:
-      nextjs:
-        condition: service_healthy
-
+      - nextjs
 networks:
   web:
     driver: bridge
