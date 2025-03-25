@@ -36,9 +36,15 @@ services:
       - open-webui:/app/backend/data
     networks:
       - web
+    env_file:
+      - .env
     environment:
       - ENABLE_OAUTH_SIGNUP=True
       - ENABLE_LOGIN_FORM=False
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_OAUTH_SCOPE=${GOOGLE_OAUTH_SCOPE}
+      - GOOGLE_REDIRECT_URI=${GOOGLE_REDIRECT_URI}
 networks:
   web:
     driver: bridge
@@ -49,3 +55,4 @@ volumes:
   caddy_config:
     driver: local
   open-webui:
+    driver: local
