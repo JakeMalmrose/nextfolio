@@ -37,8 +37,8 @@ services:
     networks:
       - web
     environment:
-      - ENABLE_OAUTH_SIGNUP=true
-      - ENABLE_LOGIN_FORM=false
+      - ENABLE_OAUTH_SIGNUP=True
+      - ENABLE_LOGIN_FORM=False
 networks:
   web:
     driver: bridge
