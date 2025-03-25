@@ -6,16 +6,9 @@
 }
 
 # Domain configuration for malmrose.com (both www and non-www)
-malmrose.com, www.malmrose.com, :80 {
-    # Route /llm path to openwebui
-    handle_path /llm* {
-        reverse_proxy openwebui
-    }
-    
-    # Route everything else to Next.js
-    handle {
-        reverse_proxy nextjs:3000
-    }
+malmrose.com, www.malmrose.com {
+    # Route everything to Next.js
+    reverse_proxy nextjs:3000
     
     # Automatic HTTPS with Let's Encrypt
     # tls {
@@ -26,4 +19,21 @@ malmrose.com, www.malmrose.com, :80 {
     # log {
     #     output file /var/log/caddy/access.log
     # }
+}
+
+# Subdomain for OpenWebUI
+llm.malmrose.com, www.llm.malmrose.com {
+    # Route all requests to OpenWebUI
+    reverse_proxy openwebui:8080
+    
+    # Automatic HTTPS with Let's Encrypt
+    # tls {
+    #     # This will issue certificates automatically
+    # }
+}
+
+# Fallback for IP access
+:80 {
+    # Route all requests to Next.js
+    reverse_proxy nextjs:3000
 }
