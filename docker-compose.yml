@@ -27,6 +27,7 @@ services:
       - web
     depends_on:
       - nextjs
+      - openwebui
 
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
