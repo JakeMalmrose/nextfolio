@@ -31,7 +31,9 @@ const Navbar = () => {
             NewsBites
           </Link>
           <a 
-            href="/llm" 
+            href="https://llm.malmrose.com" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="ml-2 px-3 py-1 rounded-md bg-primary text-black font-medium hover:bg-opacity-90 transition-colors"
           >
             AI Studio
