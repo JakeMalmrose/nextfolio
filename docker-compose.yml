@@ -36,6 +36,9 @@ services:
       - open-webui:/app/backend/data
     networks:
       - web
+    environment:
+      - ENABLE_OAUTH_SIGNUP=true
+      - ENABLE_LOGIN_FORM=false
 networks:
   web:
     driver: bridge
