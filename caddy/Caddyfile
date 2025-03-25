@@ -6,9 +6,16 @@
 }
 
 # Domain configuration for malmrose.com (both www and non-www)
-malmrose.com, www.malmrose.com {
-    # Reverse proxy to Next.js
-    reverse_proxy nextjs:3000
+malmrose.com, www.malmrose.com, :80 {
+    # Route /llm path to openwebui
+    handle_path /llm* {
+        reverse_proxy openwebui
+    }
+    
+    # Route everything else to Next.js
+    handle {
+        reverse_proxy nextjs:3000
+    }
     
     # Automatic HTTPS with Let's Encrypt
     # tls {
@@ -19,10 +26,4 @@ malmrose.com, www.malmrose.com {
     # log {
     #     output file /var/log/caddy/access.log
     # }
-}
-
-# Fallback for IP access - optional but helps during DNS propagation
-:80 {
-    # Reverse proxy to Next.js
-    reverse_proxy nextjs:3000
 }

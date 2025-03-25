@@ -30,10 +30,11 @@ services:
 
   openwebui:
     image: ghcr.io/open-webui/open-webui:main
-    ports:
-      - "3000:8080"
+    restart: unless-stopped
     volumes:
       - open-webui:/app/backend/data
+    networks:
+      - web
 networks:
   web:
     driver: bridge

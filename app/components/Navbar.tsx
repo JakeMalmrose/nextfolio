@@ -17,7 +17,7 @@ const Navbar = () => {
           Jake Malmrose
         </Link>
 
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <Link href="/firefly-events" className={`nav-link ${isActive('/firefly-events')}`}>
             Firefly
           </Link>
@@ -30,6 +30,12 @@ const Navbar = () => {
           <Link href="/newsbites" className={`nav-link ${isActive('/newsbites')}`}>
             NewsBites
           </Link>
+          <a 
+            href="/llm" 
+            className="ml-2 px-3 py-1 rounded-md bg-primary text-black font-medium hover:bg-opacity-90 transition-colors"
+          >
+            AI Studio
+          </a>
         </div>
       </div>
     </nav>
