@@ -85,7 +85,7 @@ This project is automatically deployed to a personal Ubuntu NUC server using Git
 3.  **Server Prerequisites:**
     *   Docker and Docker Compose must be installed on the target server.
     *   The deployment user (`${{ secrets.USERNAME }}`) needs passwordless sudo permissions for Docker commands. This can be set up using the `scripts/setup-passwordless-sudo.sh` script. See `scripts/README.md` for details.
-    *   An `.env` file needs to exist in the `~/nextfolio` directory on the server containing secrets like `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, etc., for the OpenWebUI service.
+    *   An `.env` file needs to exist in the `~/nextfolio` directory on the server containing secrets like `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, etc., for the OpenWebUI service. It'll run without it but openwebUI will be non-functional.
 
 ---
 
