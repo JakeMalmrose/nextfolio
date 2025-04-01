@@ -102,33 +102,31 @@ This project is automatically deployed to a personal Ubuntu NUC server using Git
 
 ---
 
-## 📂 Project Structure
-├── .github/workflows/ # GitHub Actions CI/CD pipeline
-├── app/ # Next.js App Router directory
-│ ├── components/ # Reusable React components (e.g., Navbar)
-│ ├── firefly-events/ # Page for Firefly Events project details
-│ ├── gambling/ # Placeholder page
-│ ├── newsbites/ # Page for NewsBites project details
-│ ├── projects/ # Page listing all projects
-│ ├── resume/ # Online resume page
-│ ├── globals.css # Global styles and Tailwind directives
-│ ├── layout.tsx # Root layout component
-│ └── page.tsx # Homepage component
-├── caddy/ # Caddy configuration and setup scripts
-│ ├── Caddyfile # Caddy configuration for reverse proxy and HTTPS
-│ ├── README.md # Caddy specific documentation
-│ └── setup.sh # Manual Caddy installation script (alternative)
-├── public/ # Static assets (images, SVGs)
-├── scripts/ # Utility scripts
-│ ├── README.md # Script documentation
-│ └── setup-passwordless-sudo.sh # Script for deployment server setup
-├── .dockerignore # Files to ignore in Docker build context
-├── .gitignore # Files to ignore in Git
-├── docker-compose.yml # Docker Compose configuration for services
-├── Dockerfile.next # Dockerfile for the Next.js application
-├── next.config.ts # Next.js configuration
-├── package.json # Node.js project manifest and dependencies
-├── postcss.config.mjs # PostCSS configuration (for Tailwind)
-├── README.md # This file
-├── tailwind.config.ts # Tailwind CSS configuration
-└── tsconfig.json # TypeScript configuration
+## 📂 Project Structure  
+├── .github/workflows/ # GitHub Actions CI/CD pipeline  
+├── app/ # Next.js App Router directory  
+│ ├── components/ # Reusable React components (e.g., Navbar)  
+│ ├── firefly-events/ # Page for Firefly Events project details  
+│ ├── gambling/ # Placeholder page  
+│ ├── newsbites/ # Page for NewsBites project details  
+│ ├── projects/ # Page listing all projects  
+│ ├── resume/ # Online resume page  
+│ ├── globals.css # Global styles and Tailwind directives  
+│ ├── layout.tsx # Root layout component  
+│ └── page.tsx # Homepage component  
+├── caddy/ # Caddy configuration and setup scripts  
+│ ├── Caddyfile # Caddy configuration for reverse proxy and HTTPS  
+│ ├── README.md # Caddy specific documentation  
+├── public/ # Static assets (images, SVGs)  
+├── scripts/ # Utility scripts  
+│ ├── README.md # Script documentation   
+├── .dockerignore # Files to ignore in Docker build context  
+├── .gitignore # Files to ignore in Git  
+├── docker-compose.yml # Docker Compose configuration for services  
+├── Dockerfile.next # Dockerfile for the Next.js application  
+├── next.config.ts # Next.js configuration  
+├── package.json # Node.js project manifest and dependencies  
+├── postcss.config.mjs # PostCSS configuration (for Tailwind)  
+├── README.md # This file  
+├── tailwind.config.ts # Tailwind CSS configuration  
+└── tsconfig.json # TypeScript configuration  
