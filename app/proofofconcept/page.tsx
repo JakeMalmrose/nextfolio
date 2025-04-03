@@ -33,7 +33,7 @@ const WorkfrontPortal = () => {
     setPage('portal');
   };
 
-  const handleDelete = (instance) => {
+  const handleDelete = (instance: any) => {
     setInstanceToDelete(instance);
     setShowDeleteModal(true);
   };
@@ -54,32 +54,105 @@ const WorkfrontPortal = () => {
   const currentInstances = adminInstances.slice(startIndex, endIndex);
   const totalPages = Math.ceil(adminInstances.length / 5);
 
+  // Adobe brand style overrides
+  const adobeStyles = {
+    page: {
+      backgroundColor: '#f5f5f5',
+      color: '#2c2c2c',
+      fontFamily: 'Adobe Clean, sans-serif'
+    },
+    header: {
+      backgroundColor: '#2c2c2c',
+      color: '#ffffff'
+    },
+    card: {
+      backgroundColor: '#ffffff',
+      borderRadius: '4px',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+    },
+    primaryButton: {
+      backgroundColor: '#fa0f00',
+      color: '#ffffff',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '8px 16px',
+      fontWeight: 500
+    },
+    secondaryButton: {
+      backgroundColor: 'transparent',
+      color: '#505050',
+      border: '1px solid #d3d3d3',
+      borderRadius: '4px',
+      padding: '8px 16px'
+    },
+    destructiveButton: {
+      backgroundColor: '#fa0f00',
+      color: '#ffffff',
+      border: 'none',
+      borderRadius: '4px',
+      padding: '8px 16px'
+    },
+    input: {
+      backgroundColor: '#ffffff',
+      border: '1px solid #d3d3d3',
+      borderRadius: '4px',
+      padding: '8px 12px',
+      color: '#2c2c2c'
+    },
+    tableHeader: {
+      backgroundColor: '#f5f5f5',
+      color: '#6e6e6e'
+    },
+    modalOverlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    table: {
+      borderColor: '#e1e1e1'
+    },
+    link: {
+      color: '#1473e6'
+    },
+    segmentedControl: {
+      backgroundColor: '#e1e1e1',
+      selectedColor: '#fa0f00',
+      textColor: '#2c2c2c',
+      selectedTextColor: '#ffffff'
+    }
+  };
+
   // Render login page
   if (page === 'login') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="paper w-96">
+      <div style={adobeStyles.page} className="min-h-screen flex items-center justify-center">
+        <div style={adobeStyles.card} className="p-8 w-96">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold gradient-text">Workfront Portal</h2>
-            <p className="mt-1">Sign in with your Okta account</p>
+            <svg width="48" height="48" viewBox="0 0 240 234" className="mx-auto mb-2">
+              <path d="M42.3,122l-3,7.2h-.1V122h-3.8v12.7h3.8l3.3-7.7h.1v7.7h3.8V122H42.3z" fill="#fa0f00"/>
+              <path d="M54.7,126.8h-2.7v-3.1h2.7v-2.3h-2.7v-3h-3.8v12.3h7.2v-2.3h-3.4V126.8z" fill="#fa0f00"/>
+              <rect width="240" height="234" fill="none"/>
+            </svg>
+            <h2 style={{color: '#2c2c2c'}} className="text-2xl font-bold">Workfront Portal</h2>
+            <p style={{color: '#6e6e6e'}} className="mt-1">Sign in with your Okta account</p>
           </div>
           
           <form className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Email</label>
               <input 
                 type="email" 
-                className="w-full px-3 py-2 bg-background-paper border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                style={adobeStyles.input}
+                className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="your.email@company.com"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium mb-1">Password</label>
+              <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Password</label>
               <div className="relative">
                 <input 
                   type={passwordVisible ? "text" : "password"} 
-                  className="w-full px-3 py-2 bg-background-paper border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Enter your password"
                 />
                 <button 
@@ -97,26 +170,27 @@ const WorkfrontPortal = () => {
                 <input 
                   type="checkbox" 
                   id="remember-me" 
-                  className="h-4 w-4 bg-background-paper border-primary rounded"
+                  className="h-4 w-4 text-red-600 focus:ring-red-500 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm">
+                <label htmlFor="remember-me" style={{color: '#6e6e6e'}} className="ml-2 block text-sm">
                   Remember me
                 </label>
               </div>
-              <a href="#" className="text-sm text-primary hover:text-secondary">Forgot password?</a>
+              <a href="#" style={adobeStyles.link} className="text-sm hover:underline">Forgot password?</a>
             </div>
             
             <button
               type="button"
               onClick={handleLogin}
-              className="w-full bg-primary text-background py-2 px-4 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              style={adobeStyles.primaryButton}
+              className="w-full hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
             >
               Sign in with Okta
             </button>
           </form>
           
-          <div className="mt-6 text-center text-sm">
-            Need help? Contact <a href="#" className="text-primary hover:text-secondary">IT Support</a>
+          <div className="mt-6 text-center text-sm" style={{color: '#6e6e6e'}}>
+            Need help? Contact <a href="#" style={adobeStyles.link} className="hover:underline">IT Support</a>
           </div>
         </div>
       </div>
@@ -125,29 +199,44 @@ const WorkfrontPortal = () => {
 
   // Portal page (User or Admin)
   return (
-    <div className="min-h-screen">
+    <div style={adobeStyles.page} className="min-h-screen">
       {/* Header */}
-      <header className="paper mb-6 rounded-none">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center">
-          <h1 className="text-xl font-semibold gradient-text">Workfront Instance Manager</h1>
+      <header style={adobeStyles.header} className="mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <svg width="30" height="30" viewBox="0 0 240 234" className="mr-2">
+              <path d="M42.3,122l-3,7.2h-.1V122h-3.8v12.7h3.8l3.3-7.7h.1v7.7h3.8V122H42.3z" fill="#fa0f00"/>
+              <path d="M54.7,126.8h-2.7v-3.1h2.7v-2.3h-2.7v-3h-3.8v12.3h7.2v-2.3h-3.4V126.8z" fill="#fa0f00"/>
+              <rect width="240" height="234" fill="none"/>
+            </svg>
+            <h1 className="text-xl font-semibold">Workfront Instance Manager</h1>
+          </div>
           
           <div className="flex items-center space-x-4">
-            <div className="bg-background rounded-full p-1 flex">
+            <div style={{backgroundColor: adobeStyles.segmentedControl.backgroundColor}} className="rounded-full p-1 flex">
               <button 
-                className={`px-3 py-1 rounded-full text-sm flex items-center ${role === 'user' ? 'bg-primary text-background' : ''}`}
+                style={{
+                  backgroundColor: role === 'user' ? adobeStyles.segmentedControl.selectedColor : 'transparent',
+                  color: role === 'user' ? adobeStyles.segmentedControl.selectedTextColor : adobeStyles.segmentedControl.textColor
+                }}
+                className="px-3 py-1 rounded-full text-sm flex items-center"
                 onClick={() => setRole('user')}
               >
                 <User size={16} className="mr-1" /> User
               </button>
               <button 
-                className={`px-3 py-1 rounded-full text-sm flex items-center ${role === 'admin' ? 'bg-primary text-background' : ''}`}
+                style={{
+                  backgroundColor: role === 'admin' ? adobeStyles.segmentedControl.selectedColor : 'transparent',
+                  color: role === 'admin' ? adobeStyles.segmentedControl.selectedTextColor : adobeStyles.segmentedControl.textColor
+                }}
+                className="px-3 py-1 rounded-full text-sm flex items-center"
                 onClick={() => setRole('admin')}
               >
                 <Shield size={16} className="mr-1" /> Admin
               </button>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-background">
+              <div className="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-white">
                 JD
               </div>
               <span className="text-sm font-medium">John Doe</span>
@@ -157,15 +246,16 @@ const WorkfrontPortal = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container py-6">
-        <div className="paper">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div style={adobeStyles.card} className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-medium gradient-text">
+            <h2 style={{color: '#2c2c2c'}} className="text-lg font-medium">
               {role === 'user' ? 'My Workfront Instances' : 'All Workfront Instances'}
             </h2>
             <button 
               onClick={toggleCreateModal}
-              className="bg-primary text-background py-2 px-4 rounded-md flex items-center hover:opacity-90"
+              style={adobeStyles.primaryButton}
+              className="flex items-center hover:bg-red-800"
             >
               <Plus size={16} className="mr-1" /> Create Instance
             </button>
@@ -175,35 +265,39 @@ const WorkfrontPortal = () => {
           {role === 'admin' && (
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div>
-                <label className="block text-sm font-medium mb-1">Cluster ID</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Cluster ID</label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Filter by Cluster ID"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">IMS ID</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">IMS ID</label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Filter by IMS ID"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">User ID</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">User ID</label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Filter by User ID"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Search</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Search</label>
                 <div className="relative">
                   <input 
                     type="text" 
-                    className="w-full border border-primary bg-background-paper rounded-md pl-10 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                    style={adobeStyles.input}
+                    className="w-full pl-10 focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="Search by name"
                   />
                   <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
@@ -214,47 +308,54 @@ const WorkfrontPortal = () => {
           
           {/* Instances Table */}
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-primary divide-opacity-30">
-              <thead>
+            <table className="min-w-full" style={{borderCollapse: 'separate', borderSpacing: '0'}}>
+              <thead style={adobeStyles.tableHeader}>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-primary uppercase tracking-wider">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-primary uppercase tracking-wider">Subdomain</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-primary uppercase tracking-wider">User ID</th>
+                  <th style={{textAlign: 'left', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider rounded-tl-md">Name</th>
+                  <th style={{textAlign: 'left', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider">Subdomain</th>
+                  <th style={{textAlign: 'left', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider">User ID</th>
                   {role === 'admin' && (
                     <>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-primary uppercase tracking-wider">Cluster ID</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-primary uppercase tracking-wider">IMS ID</th>
+                      <th style={{textAlign: 'left', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider">Cluster ID</th>
+                      <th style={{textAlign: 'left', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider">IMS ID</th>
                     </>
                   )}
-                  <th className="px-6 py-3 text-right text-xs font-medium text-primary uppercase tracking-wider">Actions</th>
+                  <th style={{textAlign: 'right', padding: '12px 16px', fontWeight: 500}} className="text-xs uppercase tracking-wider rounded-tr-md">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-primary divide-opacity-20">
-                {(role === 'user' ? userInstances : currentInstances).map((instance) => (
-                  <tr key={instance.id} className="hover:bg-background-paper">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium">{instance.name}</div>
+              <tbody>
+                {(role === 'user' ? userInstances : currentInstances).map((instance, index) => (
+                  <tr 
+                    key={instance.id} 
+                    style={{
+                      backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9',
+                      borderBottom: '1px solid #e1e1e1'
+                    }}
+                    className="hover:bg-gray-100"
+                  >
+                    <td style={{padding: '12px 16px'}} className="whitespace-nowrap">
+                      <div style={{color: '#2c2c2c'}} className="text-sm font-medium">{instance.name}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm opacity-80">{instance.subdomain}</div>
+                    <td style={{padding: '12px 16px'}} className="whitespace-nowrap">
+                      <div style={{color: '#6e6e6e'}} className="text-sm">{instance.subdomain}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm opacity-80">{instance.userId}</div>
+                    <td style={{padding: '12px 16px'}} className="whitespace-nowrap">
+                      <div style={{color: '#6e6e6e'}} className="text-sm">{instance.userId}</div>
                     </td>
                     {role === 'admin' && (
                       <>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm opacity-80">{instance.clusterId}</div>
+                        <td style={{padding: '12px 16px'}} className="whitespace-nowrap">
+                          <div style={{color: '#6e6e6e'}} className="text-sm">{instance.clusterId}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm opacity-80">{instance.imsId}</div>
+                        <td style={{padding: '12px 16px'}} className="whitespace-nowrap">
+                          <div style={{color: '#6e6e6e'}} className="text-sm">{instance.imsId}</div>
                         </td>
                       </>
                     )}
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <td style={{padding: '12px 16px'}} className="whitespace-nowrap text-right">
                       <button
                         onClick={() => handleDelete(instance)}
-                        className="text-secondary hover:opacity-80 focus:outline-none focus:underline"
+                        className="text-red-600 hover:text-red-800 focus:outline-none"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -268,7 +369,7 @@ const WorkfrontPortal = () => {
           {/* Pagination (Admin only) */}
           {role === 'admin' && (
             <div className="flex items-center justify-between mt-6">
-              <div className="text-sm opacity-80">
+              <div style={{color: '#6e6e6e'}} className="text-sm">
                 Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{Math.min(endIndex, adminInstances.length)}</span> of{' '}
                 <span className="font-medium">{adminInstances.length}</span> instances
               </div>
@@ -276,7 +377,11 @@ const WorkfrontPortal = () => {
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded-md ${currentPage === 1 ? 'bg-background-paper opacity-50 cursor-not-allowed' : 'bg-background-paper border border-primary hover:bg-background'}`}
+                  style={{
+                    ...adobeStyles.secondaryButton,
+                    opacity: currentPage === 1 ? 0.5 : 1,
+                    cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+                  }}
                 >
                   <ChevronLeft size={16} />
                 </button>
@@ -284,7 +389,11 @@ const WorkfrontPortal = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`px-3 py-1 rounded-md ${currentPage === i + 1 ? 'bg-primary text-background' : 'bg-background-paper border border-primary hover:bg-background'}`}
+                    style={{
+                      ...(currentPage === i + 1 ? 
+                        {...adobeStyles.primaryButton, padding: '8px 12px'} : 
+                        {...adobeStyles.secondaryButton, padding: '8px 12px'})
+                    }}
                   >
                     {i + 1}
                   </button>
@@ -292,7 +401,11 @@ const WorkfrontPortal = () => {
                 <button
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded-md ${currentPage === totalPages ? 'bg-background-paper opacity-50 cursor-not-allowed' : 'bg-background-paper border border-primary hover:bg-background'}`}
+                  style={{
+                    ...adobeStyles.secondaryButton,
+                    opacity: currentPage === totalPages ? 0.5 : 1,
+                    cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
+                  }}
                 >
                   <ChevronRight size={16} />
                 </button>
@@ -304,29 +417,31 @@ const WorkfrontPortal = () => {
 
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="paper max-w-md w-full">
+        <div style={adobeStyles.modalOverlay} className="fixed inset-0 flex items-center justify-center z-50">
+          <div style={adobeStyles.card} className="p-6 max-w-md w-full">
             <div className="flex justify-between items-start">
-              <h3 className="text-lg font-medium gradient-text">Confirm Deletion</h3>
-              <button onClick={() => setShowDeleteModal(false)} className="text-gray-400 hover:text-foreground">
+              <h3 style={{color: '#2c2c2c'}} className="text-lg font-medium">Confirm Deletion</h3>
+              <button onClick={() => setShowDeleteModal(false)} className="text-gray-400 hover:text-gray-600">
                 <X size={20} />
               </button>
             </div>
             <div className="mt-4">
-              <p className="opacity-80">
-                Are you sure you want to delete the instance "{instanceToDelete?.name}"? This action cannot be undone.
+              <p style={{color: '#6e6e6e'}}>
+                Are you sure you want to delete the instance? This action cannot be undone.
               </p>
             </div>
             <div className="mt-6 flex justify-end space-x-3">
               <button
                 onClick={() => setShowDeleteModal(false)}
-                className="px-4 py-2 border border-primary rounded-md bg-background-paper hover:bg-background"
+                style={adobeStyles.secondaryButton}
+                className="hover:bg-gray-100"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
-                className="px-4 py-2 bg-secondary text-foreground rounded-md hover:opacity-90"
+                style={adobeStyles.destructiveButton}
+                className="hover:bg-red-800"
               >
                 Delete
               </button>
@@ -337,52 +452,57 @@ const WorkfrontPortal = () => {
 
       {/* Create Instance Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="paper max-w-md w-full">
+        <div style={adobeStyles.modalOverlay} className="fixed inset-0 flex items-center justify-center z-50">
+          <div style={adobeStyles.card} className="p-6 max-w-md w-full">
             <div className="flex justify-between items-start">
-              <h3 className="text-lg font-medium gradient-text">Create New Instance</h3>
-              <button onClick={toggleCreateModal} className="text-gray-400 hover:text-foreground">
+              <h3 style={{color: '#2c2c2c'}} className="text-lg font-medium">Create New Instance</h3>
+              <button onClick={toggleCreateModal} className="text-gray-400 hover:text-gray-600">
                 <X size={20} />
               </button>
             </div>
             <div className="mt-4 space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Name <span className="text-secondary">*</span></label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Name <span className="text-red-600">*</span></label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Instance name"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Subdomain <span className="text-secondary">*</span></label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Subdomain <span className="text-red-600">*</span></label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Instance subdomain"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">User ID <span className="text-secondary">*</span></label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">User ID <span className="text-red-600">*</span></label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="User ID"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Cluster ID (Optional)</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">Cluster ID (Optional)</label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Cluster ID"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">IMS ID (Optional)</label>
+                <label style={{color: '#6e6e6e'}} className="block text-sm font-medium mb-1">IMS ID (Optional)</label>
                 <input 
                   type="text" 
-                  className="w-full border border-primary bg-background-paper rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={adobeStyles.input}
+                  className="w-full focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="IMS ID"
                 />
               </div>
@@ -390,13 +510,15 @@ const WorkfrontPortal = () => {
             <div className="mt-6 flex justify-end space-x-3">
               <button
                 onClick={toggleCreateModal}
-                className="px-4 py-2 border border-primary rounded-md bg-background-paper hover:bg-background"
+                style={adobeStyles.secondaryButton}
+                className="hover:bg-gray-100"
               >
                 Cancel
               </button>
               <button
                 onClick={toggleCreateModal}
-                className="px-4 py-2 bg-primary text-background rounded-md hover:opacity-90"
+                style={adobeStyles.primaryButton}
+                className="hover:bg-red-800"
               >
                 Create
               </button>
