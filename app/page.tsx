@@ -13,17 +13,17 @@ export default function Home() {
       
       <div className="flex flex-wrap gap-4 justify-center">
         <Link 
-          href="/firefly-events"
+          href="/qr"
           className="px-6 py-3 bg-primary text-background font-medium rounded-md hover:opacity-90 transition"
         >
-          View Firefly Events
+          QR Code Maker
         </Link>
         
         <Link 
-          href="/projects"
+          href="/resume"
           className="px-6 py-3 border border-secondary text-secondary font-medium rounded-md hover:bg-secondary hover:bg-opacity-10 transition"
         >
-          See My Projects
+          My Resume
         </Link>
       </div>
       
