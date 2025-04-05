@@ -21,7 +21,7 @@ export default function Home() {
         
         <Link 
           href="/resume"
-          className="px-6 py-3 border border-secondary text-secondary font-medium rounded-md hover:bg-secondary hover:bg-opacity-10 transition"
+          className="px-6 py-3 bg-secondary text-background font-medium rounded-md hover:opacity-90 transition"
         >
           My Resume
         </Link>
