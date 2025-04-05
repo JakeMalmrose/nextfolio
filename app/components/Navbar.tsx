@@ -27,8 +27,8 @@ const Navbar = () => {
           <Link href="/resume" className={`nav-link ${isActive('/resume')}`}>
             Resume
           </Link>
-          <Link href="/newsbites" className={`nav-link ${isActive('/newsbites')}`}>
-            NewsBites
+          <Link href="/qr" className={`nav-link ${isActive('/qr')}`}>
+            QR
           </Link>
           <a 
             href="https://llm.malmrose.com" 
