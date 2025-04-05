@@ -66,17 +66,18 @@ const ProjectCard = ({ project }: { project: Project }) => {
 export default function Projects() {
   const [projects] = useState<Project[]>([
     {
-      title: "Firefly Events",
-      date: "JAN 2025 – CURRENT",
+      title: "Portfolio Website",
+      date: "MAR 2025 - CURRENT",
       description: [
-        "Helped build a full stack venue rental platform with the Reserved team.",
-        "Implemented testing framework and created E2E, integration, and unit tests.",
-        "Used Prisma ORM and Clerk to implement fast secure backend endpoints.",
-        "Built pages from scratch including frontend through backend implementation."
+        "Built a responsive, modern portfolio website using Next.js 15 and React 19.",
+        "Implemented a clean, dark-themed UI with Tailwind CSS 4 for styling.",
+        "Deployed using Docker and Caddy for HTTPS with seamless CI/CD via GitHub Actions.",
+        "Created a modular, maintainable codebase with TypeScript for type safety."
       ],
-      techStack: ["React", "Typescript", "Next.js", "Tailwind", "MongoDB", "Clerk"],
+      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Docker", "Caddy", "GitHub Actions"],
       links: {
-        demo: "https://reserved.firefly.events/"
+        demo: "https://malmrose.com/",
+        github: "https://github.com/JakeMalmrose/nextfolio"
       }
     },
     {
