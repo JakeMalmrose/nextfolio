@@ -39,8 +39,30 @@ export default function Resume() {
   const [experiences] = useState<Experience[]>([
     {
       title: "Software Engineer",
+      company: "Adobe",
+      date: "MAR 2025 – CURRENT",
+      description: [
+        "Leading the development of an advanced internal tooling system for creating and managing customized Workfront instances for developers and project managers.",
+        "Spearheaded the architectural design of a complex microservices-based platform, established CI/CD pipelines, and implemented secure authentication flows.",
+        "Built a full-stack solution using React, TypeScript, Vite, and Fastify with Docker and Kubernetes for infrastructure and PostgreSQL for data persistence."
+      ],
+      techStack: ["React", "TypeScript", "Vite", "Fastify", "Docker", "Kubernetes", "PostgreSQL", "Jest", "Okta"]
+    },
+    {
+      title: "Software Engineer",
+      company: "Firefly Events",
+      date: "OCT 2024 – MAR 2025",
+      description: [
+        "Built a comprehensive venue rental platform that streamlines the process of finding and booking venues for events.",
+        "Implemented full-stack features using React, TypeScript, and Next.js with Tailwind CSS for the frontend.",
+        "Created secure backend endpoints using Prisma ORM and Clerk authentication with proper validation and authorization."
+      ],
+      techStack: ["React", "TypeScript", "Next.js", "Tailwind CSS", "MongoDB", "Prisma ORM", "Clerk"]
+    },
+    {
+      title: "Software Engineer",
       company: "NewsBites",
-      date: "SEP 2024 – CURRENT",
+      date: "SEP 2024 – OCT 2024",
       description: [
         "Built an AI Powered News Summarization Website. Integrated AI tool calling, prompt engineering, and AI driven data transformation.",
         "Used state of the art generative AI models to transform data, and streamline UX.",
