@@ -18,8 +18,8 @@ const Navbar = () => {
         </Link>
 
         <div className="flex gap-6 items-center">
-          <Link href="/firefly-events" className={`nav-link ${isActive('/firefly-events')}`}>
-            Firefly
+          <Link href="/adobe" className={`nav-link ${isActive('/adobe')}`}>
+            Adobe
           </Link>
           <Link href="/projects" className={`nav-link ${isActive('/projects')}`}>
             Projects
