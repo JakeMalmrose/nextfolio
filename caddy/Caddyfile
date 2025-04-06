@@ -24,7 +24,7 @@ malmrose.com, www.malmrose.com {
 # Subdomain for pgAdmin
 pgadmin.malmrose.com, www.pgadmin.malmrose.com {
     # Route all requests to pgAdmin
-    reverse_proxy pgadmin:80
+    reverse_proxy pgadmin:5050
 }
 
 # Subdomain for OpenWebUI
