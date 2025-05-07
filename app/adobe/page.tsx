@@ -10,7 +10,7 @@ export default function Adobe() {
           Adobe | Workfront
         </h1>
         <p className="max-w-2xl mx-auto">
-          Developing a tool that enables developers, project managers, and stakeholders to create and manage customized Workfront instances efficiently and securely.uh
+          Developing a tool that enables developers, project managers, and stakeholders to create and manage customized Workfront instances efficiently and securely
         </p>
         <div className="mt-6 flex justify-center gap-4">
           <a
