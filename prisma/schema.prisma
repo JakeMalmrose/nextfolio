@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Example models - you can modify these as needed
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?  // For prompt manager authentication
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+  prompts   Prompt[]
+
+  @@map("users")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("posts")
+}
+
+model Analytics {
+  id        String   @id @default(cuid())
+  path      String
+  userAgent String?
+  ip        String?
+  timestamp DateTime @default(now())
+  metadata  Json?
+
+  @@map("analytics")
+}
+
+// Prompt Manager Models
+model Prompt {
+  id             String          @id @default(cuid())
+  title          String
+  currentVersion Int             @default(1)
+  userId         String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  versions       PromptVersion[]
+
+  @@map("prompts")
+}
+
+model PromptVersion {
+  id            String     @id @default(cuid())
+  promptId      String
+  versionNumber Int
+  content       String     @db.Text
+  variables     String[]   // JSON array of variable names
+  createdAt     DateTime   @default(now())
+  prompt        Prompt     @relation(fields: [promptId], references: [id], onDelete: Cascade)
+  testRuns      TestRun[]
+
+  @@unique([promptId, versionNumber])
+  @@map("prompt_versions")
+}
+
+model TestRun {
+  id               String         @id @default(cuid())
+  promptVersionId  String
+  variableValues   Json           // Object with variable name/value pairs
+  createdAt        DateTime       @default(now())
+  promptVersion    PromptVersion  @relation(fields: [promptVersionId], references: [id], onDelete: Cascade)
+  results          TestResult[]
+
+  @@map("test_runs")
+}
+
+model TestResult {
+  id           String   @id @default(cuid())
+  testRunId    String
+  model        String   // e.g., "gpt-4", "claude-3"
+  output       String   @db.Text
+  responseTime Int      // milliseconds
+  passed       Boolean? // null = not evaluated, true/false = user evaluation
+  createdAt    DateTime @default(now())
+  testRun      TestRun  @relation(fields: [testRunId], references: [id], onDelete: Cascade)
+
+  @@map("test_results")
+}
+
+model ModelProvider {
+  id          String  @id @default(cuid())
+  name        String  @unique // e.g., "gpt-4", "claude-3-sonnet"
+  displayName String  // e.g., "GPT-4", "Claude 3 Sonnet"
+  provider    String  // e.g., "openai", "anthropic", "local"
+  endpoint    String? // API endpoint URL
+  enabled     Boolean @default(true)
+  costPer1k   Float?  // Cost per 1k tokens
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("model_providers")
+}
+
+model ModelPreset {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g., "cheap", "expensive", "local"
+  displayName String   // e.g., "Cheap Models", "Expensive Models"
+  description String?
+  models      String[] // Array of model names
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("model_presets")
+}
