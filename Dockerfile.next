@@ -20,7 +20,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the application
+# Generate Prisma client and build the application
+RUN npx prisma generate
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -38,6 +39,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 # Set ownership for the non-root user
 RUN chown -R nextjs:nodejs /app
@@ -48,5 +52,16 @@ USER nextjs
 # Expose the listening port
 EXPOSE 3000
 
-# Run the application
-CMD ["node", "server.js"]
+# Install netcat for database health check
+USER root
+RUN apk add --no-cache netcat-openbsd
+USER nextjs
+
+# Create startup script
+COPY --from=builder /app/scripts/docker-entrypoint.sh ./docker-entrypoint.sh
+USER root
+RUN chmod +x ./docker-entrypoint.sh
+USER nextjs
+
+# Run the application with database migration
+CMD ["./docker-entrypoint.sh"]

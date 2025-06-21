@@ -10,7 +10,7 @@ const WorkfrontPortal = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [instanceToDelete, setInstanceToDelete] = useState(null);
+  const [_instanceToDelete, _setInstanceToDelete] = useState<{ id: number; name: string } | null>(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // Sample data
@@ -33,15 +33,15 @@ const WorkfrontPortal = () => {
     setPage('portal');
   };
 
-  const handleDelete = (instance: any) => {
-    setInstanceToDelete(instance);
+  const handleDelete = (instance: { id: number; name: string }) => {
+    _setInstanceToDelete(instance);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = () => {
     // In a real application, this would delete the instance
     setShowDeleteModal(false);
-    setInstanceToDelete(null);
+    _setInstanceToDelete(null);
   };
 
   const toggleCreateModal = () => {

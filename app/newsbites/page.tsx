@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 interface NewsArticle {
   id: string;
@@ -14,7 +14,7 @@ interface NewsArticle {
 }
 
 export default function NewsBites() {
-  const [articles] = useState<NewsArticle[]>([
+  const [_articles] = useState<NewsArticle[]>([
     {
       id: '1',
       title: 'AI Breakthroughs Expected to Transform Healthcare in Coming Decade',
@@ -62,7 +62,7 @@ export default function NewsBites() {
     }
   ]);
 
-  const getSentimentClass = (sentiment: string) => {
+  const _getSentimentClass = (sentiment: string) => {
     switch(sentiment) {
       case 'positive': return 'bg-green-800 bg-opacity-20 text-green-400';
       case 'negative': return 'bg-red-800 bg-opacity-20 text-red-400';

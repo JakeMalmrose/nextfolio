@@ -30,6 +30,9 @@ const Navbar = () => {
           <Link href="/qr" className={`nav-link ${isActive('/qr')}`}>
             QR
           </Link>
+          <Link href="/prompt-manager" className={`nav-link ${isActive('/prompt-manager')}`}>
+            Prompts
+          </Link>
           <a 
             href="https://llm.malmrose.com" 
             target="_blank"
