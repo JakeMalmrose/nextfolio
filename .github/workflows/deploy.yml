@@ -6,63 +6,42 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 20
-    
+
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Deploy to NUC via SSH
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.PORT }}
-        script: |
-          # Create the directory if it doesn't exist
-          mkdir -p ~/nextfolio
-          
-          # Check if repository already exists, remove it if it does
-          if [ -d ~/nextfolio/.git ]; then
-            echo "Repository exists, pulling latest changes..."
-            cd ~/nextfolio
-            git pull
-          else
-            echo "Cloning repository..."
-            # Clone without verbose output to reduce log size
-            git clone https://github.com/JakeMalmrose/nextfolio.git ~/nextfolio
-            cd ~/nextfolio
-          fi
-          
-          # Print repository info
-          echo "Repository ready, deploying with Docker..."
-          
-          # Navigate to project directory
-          cd ~/nextfolio
-          
-          # Check if Docker is installed
-          if ! command -v docker &> /dev/null; then
-            echo "Docker is not installed. Please install Docker first."
-            exit 1
-          fi
-          
-          # Stop any existing containers and remove them
-          echo "Stopping existing containers..."
-          sudo docker compose down || echo "No containers to stop."
-          
-          # Build and start containers in detached mode
-          echo "Building and starting containers..."
-          sudo docker compose build --no-cache
-          sudo docker compose up -d
-          
-          # Check if containers are running
-          echo "Checking container status..."
-          sudo docker compose ps
-          
-          # View recent logs
-          echo "Recent container logs:"
-          sudo docker compose logs --tail=20
-          
-          # Print success message at the end to confirm completion
-          echo "Deployment completed successfully!"
+
+    - name: Deploy with Docker
+      run: |
+        # Navigate to project directory
+        cd ~/nextfolio
+
+        # Pull latest changes
+        git pull
+
+        # Check if Docker is installed
+        if ! command -v docker &> /dev/null; then
+          echo "Docker is not installed. Please install Docker first."
+          exit 1
+        fi
+
+        # Stop any existing containers and remove them
+        echo "Stopping existing containers..."
+        sudo docker compose down || echo "No containers to stop."
+
+        # Build and start containers in detached mode
+        echo "Building and starting containers..."
+        sudo docker compose build --no-cache
+        sudo docker compose up -d
+
+        # Check if containers are running
+        echo "Checking container status..."
+        sudo docker compose ps
+
+        # View recent logs
+        echo "Recent container logs:"
+        sudo docker compose logs --tail=20
+
+        # Print success message at the end to confirm completion
+        echo "Deployment completed successfully!"
