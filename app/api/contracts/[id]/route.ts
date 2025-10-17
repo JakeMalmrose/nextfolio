@@ -4,7 +4,7 @@ import { getAuthUser, requireAdmin } from '@/lib/auth';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getAuthUser(request);
@@ -23,8 +23,9 @@ export async function PUT(
       );
     }
 
+    const { id } = await params;
     const contract = await prisma.contract.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name: name.trim(),
         ...(color && { color }),
@@ -49,7 +50,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const user = await getAuthUser(request);
@@ -58,8 +59,9 @@ export async function DELETE(
     if (error) {
       return NextResponse.json(error, { status: 403 });
     }
+    const { id } = await params;
     await prisma.contract.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });
