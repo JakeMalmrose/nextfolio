@@ -42,3 +42,5 @@ next-env.d.ts
 
 # claude knowledge file
 CLAUDE_KNOWLEDGE.md
+
+/app/generated/prisma

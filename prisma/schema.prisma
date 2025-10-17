@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contract {
+  id        String   @id @default(cuid())
+  name      String
+  color     String   @default("#bb86fc")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  timeEntries TimeEntry[]
+
+  @@map("contracts")
+}
+
+model TimeEntry {
+  id           String   @id @default(cuid())
+  contractId   String
+  date         DateTime
+  hoursWorked  Float
+  tasks        String
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  contract     Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@map("time_entries")
+  @@index([contractId])
+  @@index([date])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  role      String   @default("user") // "admin" or "user"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}

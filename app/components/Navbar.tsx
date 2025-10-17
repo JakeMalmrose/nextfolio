@@ -27,11 +27,14 @@ const Navbar = () => {
           <Link href="/resume" className={`nav-link ${isActive('/resume')}`}>
             Resume
           </Link>
+          <Link href="/timetracker" className={`nav-link ${isActive('/timetracker')}`}>
+            Time Tracker
+          </Link>
           <Link href="/qr" className={`nav-link ${isActive('/qr')}`}>
             QR
           </Link>
-          <a 
-            href="https://llm.malmrose.com" 
+          <a
+            href="https://llm.malmrose.com"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-2 px-3 py-1 rounded-md bg-primary text-black font-medium hover:bg-opacity-90 transition-colors"

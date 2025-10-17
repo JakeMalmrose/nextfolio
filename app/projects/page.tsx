@@ -94,18 +94,6 @@ export default function Projects() {
         github: "https://github.com/JakeMalmrose/Capstone"
       }
     },
-    {
-      title: "Vapor",
-      date: "APR 2024 – MAY 2024",
-      description: [
-        "Architected and implemented a scalable game distribution platform using microservices architecture in Go",
-        "Featuring user authentication, game management, shopping cart functionality, and admin controls"
-      ],
-      techStack: ["Golang", "Microservices", "Authentication", "Event-Driven Architecture"],
-      links: {
-        github: "https://github.com/JakeMalmrose/groupProjPro290"
-      }
-    },
   ]);
 
   return (

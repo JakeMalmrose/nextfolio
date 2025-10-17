@@ -39,14 +39,37 @@ export default function Resume() {
   const [experiences] = useState<Experience[]>([
     {
       title: "Software Engineer",
-      company: "Adobe",
-      date: "MAR 2025 – CURRENT",
+      company: "Wasatch Global",
+      date: "OCT 2025 – CURRENT",
       description: [
-        "Leading the development of an advanced internal tooling system for creating and managing customized Workfront instances for developers and project managers.",
-        "Spearheaded the architectural design of a complex microservices-based platform, established CI/CD pipelines, and implemented secure authentication flows.",
-        "Built a full-stack solution using React, TypeScript, Vite, and Fastify with Docker and Kubernetes for infrastructure and PostgreSQL for data persistence."
+        "Developing and maintaining custom C# and Python applications deployed on Azure cloud infrastructure.",
+        "Building and customizing WordPress solutions for client needs.",
+        "Working with Azure services to support enterprise applications and integrations."
       ],
-      techStack: ["React", "TypeScript", "Vite", "Fastify", "Docker", "Kubernetes", "PostgreSQL", "Jest", "Okta"]
+      techStack: ["C#", "Python", "Azure", "WordPress"]
+    },
+    {
+      title: "Software Engineer",
+      company: "Aabo Home",
+      date: "JULY 2025 – SEPT 2025",
+      description: [
+        "Architected and developed a complete internal OAuth authentication server (Authy) from scratch for Aabo Home using PHP Laravel and Passport framework.",
+        "Designed and implemented secure service integrations between Authy OAuth server and multiple third-party services, enabling centralized authentication management.",
+        "Built responsive frontend interface for OAuth server administration and user authentication workflows.",
+        "Established comprehensive testing suite to ensure authentication reliability and security compliance."
+      ],
+      techStack: ["PHP", "Laravel", "Postgres", "OAuth 2.0"]
+    },
+    {
+      title: "Software Engineer",
+      company: "Adobe",
+      date: "MAR 2025 – JUNE 2025",
+      description: [
+        "Built an internal tool for developers to manage their Workfront instances, eliminating manual setup errors and saving time on manual setup.",
+        "Architected system design for the internal tool, and mentored coworkers on the tech stack and best practices.",
+        "Implemented integrations between the application and Adobe IAM, internal Redrock service, and Okta."
+      ],
+      techStack: ["Node", "React", "Fastify", "Postgres", "Third party integrations"]
     },
     {
       title: "Software Engineer",
@@ -58,27 +81,6 @@ export default function Resume() {
         "Created secure backend endpoints using Prisma ORM and Clerk authentication with proper validation and authorization."
       ],
       techStack: ["React", "TypeScript", "Next.js", "Tailwind CSS", "MongoDB", "Prisma ORM", "Clerk"]
-    },
-    {
-      title: "Software Engineer",
-      company: "NewsBites",
-      date: "SEP 2024 – OCT 2024",
-      description: [
-        "Built an AI Powered News Summarization Website. Integrated AI tool calling, prompt engineering, and AI driven data transformation.",
-        "Used state of the art generative AI models to transform data, and streamline UX.",
-        "Processed 1000's of news articles, extracted key details with ML. Used prompt engineering and prompt caching to reduce latency below 0.5 seconds."
-      ],
-      techStack: ["React", "Typescript", "AWS", "Amplify", "Generative AI"]
-    },
-    {
-      title: "Software Developer",
-      company: "Vapor",
-      date: "APR 2024 – MAY 2024",
-      description: [
-        "Architected and implemented a scalable game distribution platform using microservices architecture in Go",
-        "Featuring user authentication, game management, shopping cart functionality, and admin controls"
-      ],
-      techStack: ["Golang", "Microservices", "Authentication", "Event-Driven Architecture"]
     }
   ]);
 
