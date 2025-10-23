@@ -79,7 +79,13 @@ export default function TimeEntryList({ entries, onUpdate, contracts, isAdmin }:
   }
 
   function formatDate(dateString: string) {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    // Split and parse as local date to avoid timezone conversion
+    const dateOnly = dateString.split('T')[0]; // Get YYYY-MM-DD part
+    const [year, month, day] = dateOnly.split('-').map(Number);
+    // Create Date in local timezone (months are 0-indexed)
+    const localDate = new Date(year, month - 1, day);
+
+    return localDate.toLocaleDateString('en-US', {
       weekday: 'short',
       month: 'short',
       day: 'numeric',
