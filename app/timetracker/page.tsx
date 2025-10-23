@@ -8,6 +8,7 @@ import WeeklyBreakdown from './components/WeeklyBreakdown';
 import AdminSetup from './components/AdminSetup';
 import LoginModal from './components/LoginModal';
 import UserManager from './components/UserManager';
+import ReportSection from './components/ReportSection';
 
 interface Contract {
   id: string;
@@ -259,6 +260,11 @@ export default function TimeTracker() {
         contracts={contracts}
         isAdmin={isAdmin}
       />
+
+      {/* Report Section */}
+      <div className="mt-8">
+        <ReportSection contracts={contracts} />
+      </div>
     </div>
   );
 }

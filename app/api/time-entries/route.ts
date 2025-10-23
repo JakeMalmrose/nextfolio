@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
     const contractId = searchParams.get('contractId');
+    const contractIds = searchParams.get('contractIds');
 
     const where: any = {};
 
@@ -27,7 +28,13 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    if (contractId) {
+    // Support both single contractId and multiple contractIds
+    if (contractIds) {
+      const ids = contractIds.split(',').filter(id => id.trim());
+      if (ids.length > 0) {
+        where.contractId = { in: ids };
+      }
+    } else if (contractId) {
       where.contractId = contractId;
     }
 
