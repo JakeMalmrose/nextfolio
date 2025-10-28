@@ -25,7 +25,7 @@ model Contract {
 model TimeEntry {
   id           String   @id @default(cuid())
   contractId   String
-  date         DateTime
+  date         DateTime @db.Date
   hoursWorked  Float
   tasks        String
   notes        String?

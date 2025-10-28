@@ -101,6 +101,13 @@ export default function TimeTracker() {
     return d;
   }
 
+  function toDateString(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   async function fetchContracts() {
     try {
       const res = await fetch('/api/contracts');
@@ -117,7 +124,7 @@ export default function TimeTracker() {
     try {
       const weekEnd = getWeekEnd(currentWeekStart);
       const res = await fetch(
-        `/api/time-entries?startDate=${currentWeekStart.toISOString()}&endDate=${weekEnd.toISOString()}`
+        `/api/time-entries?startDate=${toDateString(currentWeekStart)}&endDate=${toDateString(weekEnd)}`
       );
       if (res.ok) {
         const data = await res.json();
