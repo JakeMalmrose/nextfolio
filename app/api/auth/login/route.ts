@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json(userWithoutPassword);
     response.cookies.set('auth-token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'production' && process.env.ALLOW_HTTP_AUTH !== 'true',
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });

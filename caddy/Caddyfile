@@ -22,16 +22,16 @@ malmrose.com, www.malmrose.com {
 }
 
 # Subdomain for pgAdmin
-pgadmin.malmrose.com, www.pgadmin.malmrose.com {
+pgadmin.malmrose.com {
     # Route all requests to pgAdmin
     reverse_proxy pgadmin:80
 }
 
 # Subdomain for OpenWebUI
-llm.malmrose.com, www.llm.malmrose.com {
+llm.malmrose.com {
     # Route all requests to OpenWebUI
     reverse_proxy openwebui:8080
-    
+
     # Automatic HTTPS with Let's Encrypt
     # tls {
     #     # This will issue certificates automatically
