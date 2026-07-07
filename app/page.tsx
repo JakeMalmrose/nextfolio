@@ -101,7 +101,10 @@ const projects: PersonalProject[] = [
     description:
       'A solo-self-found dungeon-crawling ARPG: descend floors, cut and socket skill gems, manage flasks, die permanently, rise again. Go server with a web client, self-hosted and playable in your browser.',
     tech: ['Go', 'TypeScript', 'systemd', 'GitHub Actions'],
-    links: [{ label: 'Play it', href: 'https://draupforge.malmrose.com' }],
+    links: [
+      { label: 'Play it', href: 'https://draupforge.malmrose.com' },
+      { label: 'Source', href: 'https://github.com/JakeMalmrose/draupforge' },
+    ],
   },
   {
     title: 'NewsBites',
