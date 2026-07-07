@@ -42,12 +42,17 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Copy Prisma schema, generated client, and the pinned CLI (the entrypoint
-# runs migrations with it; without it npx would fetch latest at runtime)
+# Copy Prisma schema and generated client
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
 COPY --from=builder /app/prisma ./prisma
+
+# The standalone output only carries dependencies Next.js traces, which is
+# not the prisma CLI's full tree; install the pinned CLI in an isolated
+# prefix for the entrypoint's migrate step (npx here would fetch whatever
+# the latest CLI is at container start, which broke when Prisma 7 shipped)
+RUN mkdir -p /opt/prisma-cli && cd /opt/prisma-cli \
+    && npm install --no-save --no-audit --no-fund prisma@6.19.3
 
 # Copy startup script
 COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
