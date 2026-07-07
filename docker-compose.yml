@@ -1,6 +1,8 @@
 services:
   postgres:
-    image: postgres
+    # Pinned to 17: the data volume was initialized on 17.x and a silent
+    # major-version pull would leave the server unable to start on it
+    image: postgres:17
     restart: always
     ports:
       - "5432:5432"
@@ -38,9 +40,11 @@ services:
   caddy:
     image: caddy:2
     restart: unless-stopped
+    # 443 is NOT published: tailscaled (Tailscale Funnel for draupforge) holds
+    # it on the host, and public HTTPS terminates at the Cloudflare Tunnel
+    # (ingress -> nextjs:3001), so Caddy only serves plain HTTP locally
     ports:
       - "80:80"
-      - "443:443"
     environment:
       - DOMAIN=malmrose.com
     volumes:
