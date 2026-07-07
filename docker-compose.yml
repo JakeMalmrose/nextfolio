@@ -33,6 +33,9 @@ services:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://nextfolio:${POSTGRES_PASSWORD}@postgres:5432/nextfolio?schema=public
       - JWT_SECRET=${JWT_SECRET}
+      # Cloudflare Tunnel delivers plain HTTP to the container, so auth
+      # cookies can't be marked secure; set ALLOW_HTTP_AUTH=true in .env
+      - ALLOW_HTTP_AUTH=${ALLOW_HTTP_AUTH}
     depends_on:
       postgres:
         condition: service_healthy
