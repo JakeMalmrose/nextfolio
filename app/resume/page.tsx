@@ -1,215 +1,243 @@
-'use client';
+import type { Metadata } from 'next';
 
-import { useState } from 'react';
-
-interface Skill {
-  name: string;
-  level: 'proficient' | 'intermediate' | 'learning';
-}
+export const metadata: Metadata = {
+  title: 'Resume | Jake Malmrose',
+  description:
+    'Resume of Jake Malmrose — full-stack engineer working across Laravel, FastAPI, .NET, React, and Azure.',
+};
 
 interface Experience {
   title: string;
   company: string;
+  location?: string;
   date: string;
-  description: string[];
-  techStack: string[];
+  bullets: string[];
 }
 
+const skillRows: { name: string; items: string }[] = [
+  {
+    name: 'Languages',
+    items: 'PHP, Python, C# (.NET Framework + Core), TypeScript/JavaScript, Go, SQL, Bash',
+  },
+  {
+    name: 'Cloud / Infrastructure',
+    items:
+      'Azure (Functions, Durable Functions, Service Bus, Event Grid, Blob Storage, Key Vault, Static Web Apps, Entra ID, Azure SQL), AWS, Docker, Bicep, GitLab CI/CD, GitHub Actions',
+  },
+  {
+    name: 'AI / Data',
+    items:
+      'OpenAI APIs, LangChain, LangGraph, BAML, RAG, pgvector, hybrid search (BM25 + vector), Tesseract OCR, PostgreSQL, Redis',
+  },
+  {
+    name: 'Auth / Patterns',
+    items: 'JWT, OIDC, OAuth 2.0, Azure AD / Entra ID, RBAC, multi-tenant SaaS',
+  },
+];
+
+const experiences: Experience[] = [
+  {
+    title: 'Full Stack Engineer',
+    company: 'DSD Labs',
+    location: 'Salt Lake City, UT',
+    date: 'May 2026 — Present',
+    bullets: [
+      'Built GitLab CI/CD pipelines that deploy Laravel apps to Azure App Service across both commercial and GCC High (US Government) clouds, with separate dev and prod environments and per-environment config.',
+      "Built DSD's corporate site from scratch (Laravel 13, Tailwind v4, Vite), wiring public lead-capture forms cross-app into the HAL recruiting database with Cloudflare Turnstile bot protection and shared Azure Blob resume storage.",
+    ],
+  },
+  {
+    title: 'Software Engineer (Contract)',
+    company: 'MeritsAI',
+    date: 'Oct 2025 — Present',
+    bullets: [
+      'Core contributor across a multi-tenant ediscovery SaaS platform spanning a Laravel 10 webapp, FastAPI RAG service, three Azure Function apps, and a PyQt desktop client; ship features end-to-end across 5+ services.',
+      'Architected the document ingestion pipeline using Azure Blob, Event Grid, Service Bus, and Durable Functions, integrating LibreOffice conversion, Tesseract OCR, and handwriting detection feeding AI enrichment workers on OpenAI + BAML.',
+      'Designed and implemented a two-tier RBAC system (firm-level + per-case ACL) with custom Laravel middleware, policies, and a centralized authorization service across multiple role types.',
+      'Drive feature scoping directly with law-firm stakeholders in weekly working sessions; translate requirements into shipped features across the full stack.',
+    ],
+  },
+  {
+    title: 'Software Engineer (Contract)',
+    company: 'Wasatch Global Investors',
+    location: 'Salt Lake City, UT',
+    date: 'Oct 2025 — Present',
+    bullets: [
+      'Built an internal Client Agreement Tracker on Azure Static Web Apps with Entra ID auth, Key Vault, an Azure Function backend, and a SharePoint poller.',
+      'Develop and maintain a .NET Framework 4.7.2 Web API 2 backend (Dapper ORM, repository pattern, Unity DI) serving fund performance, holdings, and characteristics data to a custom WordPress PHP theme.',
+      'Built a React 18 + TypeScript SPA for digitizing DuPont financial review sheets, backed by a separate .NET Core 6 API with Azure AD OIDC authentication.',
+    ],
+  },
+  {
+    title: 'Software Engineer',
+    company: 'Aabo Home',
+    location: 'Salt Lake City, UT',
+    date: 'Jul 2025 — Oct 2025',
+    bullets: [
+      'Architected and developed a complete internal OAuth 2.0 authentication server from scratch using PHP Laravel and the Passport framework, including secure service integrations enabling centralized authentication across multiple third-party services.',
+      'Built responsive frontend administration UI and established a comprehensive test suite covering authentication and security compliance.',
+    ],
+  },
+  {
+    title: 'Software Engineer Intern',
+    company: 'Adobe',
+    location: 'Lehi, UT',
+    date: 'Mar 2025 — Jun 2025',
+    bullets: [
+      'Built an internal developer tool for managing Workfront instances, eliminating manual setup errors and reducing onboarding time.',
+      'Architected the system design and mentored coworkers on the tech stack and best practices.',
+      'Implemented integrations between the application and Adobe IAM, the internal Redrock service, and Okta.',
+    ],
+  },
+  {
+    title: 'Full Stack Developer Intern',
+    company: 'Firefly Events',
+    date: 'Jan 2025 — Mar 2025',
+    bullets: [
+      'Built a full-stack venue rental management application using Next.js, Prisma, MongoDB, React, and TailwindCSS.',
+      'Integrated an end-to-end Stripe flow for reserving and finalizing payments.',
+    ],
+  },
+];
+
 export default function Resume() {
-  const [skills] = useState<Skill[]>([
-    { name: 'JavaScript', level: 'proficient' },
-    { name: 'React', level: 'proficient' },
-    { name: 'AWS', level: 'proficient' },
-    { name: 'Python', level: 'proficient' },
-    { name: 'Git', level: 'proficient' },
-    { name: 'Golang', level: 'proficient' },
-    { name: 'AI Integration', level: 'proficient' },
-    { name: 'Docker', level: 'proficient' },
-    { name: 'C#', level: 'intermediate' },
-    { name: 'C++', level: 'intermediate' },
-    { name: 'Linux', level: 'intermediate' },
-    { name: 'Vue', level: 'intermediate' },
-    { name: 'Java', level: 'intermediate' },
-    { name: 'Jira', level: 'intermediate' },
-    { name: 'Flutter', level: 'learning' },
-    { name: 'Figma', level: 'learning' },
-    { name: 'Websockets', level: 'learning' },
-  ]);
-
-  const [experiences] = useState<Experience[]>([
-    {
-      title: "Software Engineer",
-      company: "Wasatch Global",
-      date: "OCT 2025 – CURRENT",
-      description: [
-        "Developing and maintaining custom C# and Python applications deployed on Azure cloud infrastructure.",
-        "Building and customizing WordPress solutions for client needs.",
-        "Working with Azure services to support enterprise applications and integrations."
-      ],
-      techStack: ["C#", "Python", "Azure", "WordPress"]
-    },
-    {
-      title: "Software Engineer",
-      company: "Aabo Home",
-      date: "JULY 2025 – SEPT 2025",
-      description: [
-        "Architected and developed a complete internal OAuth authentication server (Authy) from scratch for Aabo Home using PHP Laravel and Passport framework.",
-        "Designed and implemented secure service integrations between Authy OAuth server and multiple third-party services, enabling centralized authentication management.",
-        "Built responsive frontend interface for OAuth server administration and user authentication workflows.",
-        "Established comprehensive testing suite to ensure authentication reliability and security compliance."
-      ],
-      techStack: ["PHP", "Laravel", "Postgres", "OAuth 2.0"]
-    },
-    {
-      title: "Software Engineer",
-      company: "Adobe",
-      date: "MAR 2025 – JUNE 2025",
-      description: [
-        "Built an internal tool for developers to manage their Workfront instances, eliminating manual setup errors and saving time on manual setup.",
-        "Architected system design for the internal tool, and mentored coworkers on the tech stack and best practices.",
-        "Implemented integrations between the application and Adobe IAM, internal Redrock service, and Okta."
-      ],
-      techStack: ["Node", "React", "Fastify", "Postgres", "Third party integrations"]
-    },
-    {
-      title: "Software Engineer",
-      company: "Firefly Events",
-      date: "OCT 2024 – MAR 2025",
-      description: [
-        "Built a comprehensive venue rental platform that streamlines the process of finding and booking venues for events.",
-        "Implemented full-stack features using React, TypeScript, and Next.js with Tailwind CSS for the frontend.",
-        "Created secure backend endpoints using Prisma ORM and Clerk authentication with proper validation and authorization."
-      ],
-      techStack: ["React", "TypeScript", "Next.js", "Tailwind CSS", "MongoDB", "Prisma ORM", "Clerk"]
-    }
-  ]);
-
   return (
-    <div className="mt-8 mb-16">
-      <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold gradient-text">Jake Malmrose</h1>
-        <h2 className="text-xl mt-2 opacity-80">Software Engineer | AI Integration Specialist</h2>
-        
-        <div className="flex justify-center gap-4 mt-4 flex-wrap">
+    <div className="container py-12">
+      {/* Header */}
+      <div className="mb-10 text-center">
+        <h1 className="text-3xl font-bold md:text-4xl">Jake Malmrose</h1>
+        <p className="mt-1 text-lg text-muted">Full Stack Engineer</p>
+
+        <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 font-mono text-sm text-muted">
           <a href="mailto:jake.malmrose@gmail.com" className="hover:text-primary">
             jake.malmrose@gmail.com
           </a>
           <a href="tel:510-325-6879" className="hover:text-primary">
             510-325-6879
           </a>
-          <a href="https://github.com/JakeMalmrose" className="hover:text-primary" target="_blank" rel="noopener noreferrer">
-            GitHub
+          <a
+            href="https://github.com/JakeMalmrose"
+            className="hover:text-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/JakeMalmrose
           </a>
-          <a href="https://www.linkedin.com/in/jake-malmrose/" className="hover:text-primary" target="_blank" rel="noopener noreferrer">
-            LinkedIn
+          <a
+            href="https://www.linkedin.com/in/jake-malmrose/"
+            className="hover:text-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            linkedin.com/in/jake-malmrose
           </a>
-          <a href="https://www.malmrose.com" className="hover:text-primary" target="_blank" rel="noopener noreferrer">
-            Portfolio
+        </div>
+
+        <div className="mt-6">
+          <a href="/JMalmrose_Resume.docx" download className="btn btn-ghost text-sm">
+            Download resume ↓
           </a>
         </div>
       </div>
-      
-      {/* Objective Section */}
-      <div className="paper mb-8">
-        <h2 className="text-xl font-bold mb-4 text-primary">Objective</h2>
-        <p>
-          Software Engineer focused on developing distributed systems, microservices-based architectures, and monolithic applications. 
-          I have expertise in Go, React, Java, and AWS. Experienced in building scalable full-stack applications with both traditional 
-          and AI-enhanced functionalities.
-        </p>
-      </div>
-      
-      {/* Skills Section */}
-      <div className="paper mb-8">
-        <h2 className="text-xl font-bold mb-4 text-primary">Skills</h2>
-        
-        <div className="mb-6">
-          <h3 className="text-lg mb-2">Proficient</h3>
-          <div className="flex flex-wrap gap-2">
-            {skills
-              .filter(skill => skill.level === 'proficient')
-              .map(skill => (
-                <span key={skill.name} className="chip chip-primary">
-                  {skill.name}
-                </span>
-              ))
-            }
-          </div>
-        </div>
-        
-        <div className="mb-6">
-          <h3 className="text-lg mb-2">Intermediate</h3>
-          <div className="flex flex-wrap gap-2">
-            {skills
-              .filter(skill => skill.level === 'intermediate')
-              .map(skill => (
-                <span key={skill.name} className="chip chip-secondary">
-                  {skill.name}
-                </span>
-              ))
-            }
-          </div>
-        </div>
-        
-        <div>
-          <h3 className="text-lg mb-2">Actively Learning</h3>
-          <div className="flex flex-wrap gap-2">
-            {skills
-              .filter(skill => skill.level === 'learning')
-              .map(skill => (
-                <span key={skill.name} className="chip">
-                  {skill.name}
-                </span>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-      
-      {/* Experience Section */}
-      <div className="paper mb-8">
-        <h2 className="text-xl font-bold mb-4 text-primary">Industry Experience</h2>
-        
-        {experiences.map((exp, index) => (
-          <div key={exp.company + exp.date} className={index < experiences.length - 1 ? "mb-8" : ""}>
-            <div className="flex justify-between flex-wrap mb-1">
-              <h3 className="text-lg font-semibold">{exp.company}</h3>
-              <span className="text-sm opacity-70">{exp.date}</span>
+
+      {/* Skills */}
+      <div className="card mb-8">
+        <p className="section-label mb-4">skills</p>
+        <div className="flex flex-col gap-3">
+          {skillRows.map((row) => (
+            <div key={row.name} className="flex flex-col gap-1 md:flex-row">
+              <span className="w-56 shrink-0 font-mono text-xs uppercase tracking-wider text-primary">
+                {row.name}
+              </span>
+              <span className="text-sm text-muted">{row.items}</span>
             </div>
-            <p className="font-medium mb-2">{exp.title}</p>
-            
-            <ul className="list-disc pl-5 mb-3">
-              {exp.description.map((item, i) => (
-                <li key={i} className="mb-1">{item}</li>
-              ))}
+          ))}
+        </div>
+      </div>
+
+      {/* Experience */}
+      <div className="card mb-8">
+        <p className="section-label mb-6">experience</p>
+        <div className="flex flex-col gap-8">
+          {experiences.map((exp) => (
+            <div key={exp.company + exp.date}>
+              <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="text-lg font-semibold">
+                  {exp.company}
+                  {exp.location && (
+                    <span className="ml-2 text-sm font-normal text-muted">{exp.location}</span>
+                  )}
+                </h3>
+                <span className="font-mono text-xs text-muted">{exp.date}</span>
+              </div>
+              <p className="mb-2 text-sm font-medium text-primary">{exp.title}</p>
+              <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
+                {exp.bullets.map((bullet, i) => (
+                  <li key={i}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Projects */}
+      <div className="card mb-8">
+        <p className="section-label mb-6">projects</p>
+        <div className="flex flex-col gap-6">
+          <div>
+            <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-semibold">Draupforge</h3>
+              <span className="font-mono text-xs text-muted">2026</span>
+            </div>
+            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
+              <li>
+                Designed and built a hardcore browser ARPG with a Go game server and web client;
+                self-hosted with CI/CD via GitHub Actions.{' '}
+                <a
+                  href="https://draupforge.malmrose.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-accent"
+                >
+                  Playable at draupforge.malmrose.com ↗
+                </a>
+              </li>
             </ul>
-            
-            <div className="flex flex-wrap gap-2">
-              {exp.techStack.map(tech => (
-                <span key={tech} className="chip chip-primary text-sm">
-                  {tech}
-                </span>
-              ))}
-            </div>
           </div>
-        ))}
+          <div>
+            <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-semibold">
+                ASD Prediction Project
+                <span className="ml-2 text-sm font-normal text-muted">
+                  1st Place, Neumont College Hackathon
+                </span>
+              </h3>
+              <span className="font-mono text-xs text-muted">May 2025</span>
+            </div>
+            <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
+              <li>
+                Won 1st place in a weekend hackathon with a machine-learning solution predicting
+                autism status from questionnaire and demographic data; compared XGBoost, CatBoost,
+                Random Forest, and Neural Network approaches in Python/Jupyter.
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      
-      {/* Education Section */}
-      <div className="paper mb-8">
-        <h2 className="text-xl font-bold mb-4 text-primary">Education</h2>
-        <h3 className="text-lg font-semibold">Neumont College of Computer Science</h3>
-        <p className="mb-1">BS in Software Engineering</p>
-        <p className="opacity-70">SLC, UT | GPA: 3.9/4.0</p>
-      </div>
-      
-      {/* Achievements Section */}
-      <div className="paper">
-        <h2 className="text-xl font-bold mb-4 text-primary">Achievements</h2>
-        <ul className="list-disc pl-5">
-          <li className="mb-2">Neumont Esports League of Legends Team Captain (1.5 years)</li>
-          <li>Neumont Achievement Scholarship</li>
-        </ul>
+
+      {/* Education */}
+      <div className="card">
+        <p className="section-label mb-4">education</p>
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <div>
+            <h3 className="text-lg font-semibold">Neumont College of Computer Science</h3>
+            <p className="text-sm text-muted">
+              B.S. Computer Science &amp; Software Engineering · GPA: 3.98
+            </p>
+          </div>
+          <span className="font-mono text-xs text-muted">Sep 2025</span>
+        </div>
       </div>
     </div>
   );

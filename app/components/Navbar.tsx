@@ -1,46 +1,35 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
-  const pathname = usePathname();
-  
-  const isActive = (path: string) => {
-    return pathname === path ? 'text-primary border-b-2 border-primary' : '';
-  };
-
   return (
-    <nav className="bg-background-paper py-4 px-6 sticky top-0 z-10">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold nav-link">
-          Jake Malmrose
+    <nav className="sticky top-0 z-10 border-b border-line bg-background/80 backdrop-blur">
+      <div className="container flex items-center justify-between py-4">
+        <Link href="/" className="font-mono text-sm font-semibold tracking-tight text-foreground hover:text-primary transition-colors">
+          jake@malmrose.com<span className="text-primary">:~$</span>
         </Link>
 
-        <div className="flex gap-6 items-center">
-          <Link href="/adobe" className={`nav-link ${isActive('/adobe')}`}>
-            Adobe
+        <div className="flex items-center gap-5 sm:gap-6">
+          <Link href="/#work" className="nav-link hidden sm:inline">
+            Work
           </Link>
-          <Link href="/projects" className={`nav-link ${isActive('/projects')}`}>
+          <Link href="/#projects" className="nav-link hidden sm:inline">
             Projects
           </Link>
-          <Link href="/resume" className={`nav-link ${isActive('/resume')}`}>
+          <Link href="/resume" className="nav-link">
             Resume
           </Link>
-          <Link href="/timetracker" className={`nav-link ${isActive('/timetracker')}`}>
-            Time Tracker
+          <Link href="/#contact" className="nav-link">
+            Contact
           </Link>
-          <Link href="/qr" className={`nav-link ${isActive('/qr')}`}>
-            QR
-          </Link>
-          <a
-            href="https://llm.malmrose.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 px-3 py-1 rounded-md bg-primary text-black font-medium hover:bg-opacity-90 transition-colors"
+          <span
+            className="pill-disabled hidden md:inline-flex"
+            title="OpenWebUI instance — temporarily offline, coming back soon"
           >
             AI Studio
-          </a>
+            <span className="font-mono text-[0.65rem] uppercase tracking-wider">soon</span>
+          </span>
         </div>
       </div>
     </nav>
