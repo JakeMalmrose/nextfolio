@@ -87,6 +87,9 @@ services:
     env_file:
       - .env
     environment:
+      # Override the shared .env DATABASE_URL (Prisma-style ?schema=public breaks psycopg2);
+      # open-webui keeps its own sqlite in the data volume
+      - DATABASE_URL=sqlite:////app/backend/data/webui.db
       - ENABLE_OAUTH_SIGNUP=True
       - ENABLE_LOGIN_FORM=False
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
