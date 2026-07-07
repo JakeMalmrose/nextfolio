@@ -25,7 +25,7 @@ const Navbar = () => {
           </Link>
           <span
             className="pill-disabled hidden md:inline-flex"
-            title="OpenWebUI instance — temporarily offline, coming back soon"
+            title="OpenWebUI instance, temporarily offline. Coming back soon."
           >
             AI Studio
             <span className="font-mono text-[0.65rem] uppercase tracking-wider">soon</span>

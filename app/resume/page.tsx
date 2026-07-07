@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Resume | Jake Malmrose',
   description:
-    'Resume of Jake Malmrose — full-stack engineer working across Laravel, FastAPI, .NET, React, and Azure.',
+    'Resume of Jake Malmrose, full-stack engineer working across Laravel, FastAPI, .NET, React, and Azure.',
 };
 
 interface Experience {
@@ -40,7 +40,7 @@ const experiences: Experience[] = [
     title: 'Full Stack Engineer',
     company: 'DSD Labs',
     location: 'Salt Lake City, UT',
-    date: 'May 2026 — Present',
+    date: 'May 2026 – Present',
     bullets: [
       'Built GitLab CI/CD pipelines that deploy Laravel apps to Azure App Service across both commercial and GCC High (US Government) clouds, with separate dev and prod environments and per-environment config.',
       "Built DSD's corporate site from scratch (Laravel 13, Tailwind v4, Vite), wiring public lead-capture forms cross-app into the HAL recruiting database with Cloudflare Turnstile bot protection and shared Azure Blob resume storage.",
@@ -49,7 +49,7 @@ const experiences: Experience[] = [
   {
     title: 'Software Engineer (Contract)',
     company: 'MeritsAI',
-    date: 'Oct 2025 — Present',
+    date: 'Oct 2025 – Present',
     bullets: [
       'Core contributor across a multi-tenant ediscovery SaaS platform spanning a Laravel 10 webapp, FastAPI RAG service, three Azure Function apps, and a PyQt desktop client; ship features end-to-end across 5+ services.',
       'Architected the document ingestion pipeline using Azure Blob, Event Grid, Service Bus, and Durable Functions, integrating LibreOffice conversion, Tesseract OCR, and handwriting detection feeding AI enrichment workers on OpenAI + BAML.',
@@ -61,7 +61,7 @@ const experiences: Experience[] = [
     title: 'Software Engineer (Contract)',
     company: 'Wasatch Global Investors',
     location: 'Salt Lake City, UT',
-    date: 'Oct 2025 — Present',
+    date: 'Oct 2025 – Present',
     bullets: [
       'Built an internal Client Agreement Tracker on Azure Static Web Apps with Entra ID auth, Key Vault, an Azure Function backend, and a SharePoint poller.',
       'Develop and maintain a .NET Framework 4.7.2 Web API 2 backend (Dapper ORM, repository pattern, Unity DI) serving fund performance, holdings, and characteristics data to a custom WordPress PHP theme.',
@@ -72,7 +72,7 @@ const experiences: Experience[] = [
     title: 'Software Engineer',
     company: 'Aabo Home',
     location: 'Salt Lake City, UT',
-    date: 'Jul 2025 — Oct 2025',
+    date: 'Jul 2025 – Oct 2025',
     bullets: [
       'Architected and developed a complete internal OAuth 2.0 authentication server from scratch using PHP Laravel and the Passport framework, including secure service integrations enabling centralized authentication across multiple third-party services.',
       'Built responsive frontend administration UI and established a comprehensive test suite covering authentication and security compliance.',
@@ -82,7 +82,7 @@ const experiences: Experience[] = [
     title: 'Software Engineer Intern',
     company: 'Adobe',
     location: 'Lehi, UT',
-    date: 'Mar 2025 — Jun 2025',
+    date: 'Mar 2025 – Jun 2025',
     bullets: [
       'Built an internal developer tool for managing Workfront instances, eliminating manual setup errors and reducing onboarding time.',
       'Architected the system design and mentored coworkers on the tech stack and best practices.',
@@ -92,7 +92,7 @@ const experiences: Experience[] = [
   {
     title: 'Full Stack Developer Intern',
     company: 'Firefly Events',
-    date: 'Jan 2025 — Mar 2025',
+    date: 'Jan 2025 – Mar 2025',
     bullets: [
       'Built a full-stack venue rental management application using Next.js, Prisma, MongoDB, React, and TailwindCSS.',
       'Integrated an end-to-end Stripe flow for reserving and finalizing payments.',

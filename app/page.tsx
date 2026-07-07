@@ -29,13 +29,13 @@ const engagements: Engagement[] = [
   {
     company: 'MeritsAI',
     role: 'Software Engineer (Contract)',
-    date: 'Oct 2025 — Present',
+    date: 'Oct 2025 – Present',
     summary:
-      'Legal-tech SaaS for ediscovery: document intake, OCR, AI-assisted review, semantic search, and case management, sold to law firms. Core contributor across the entire platform — a Laravel webapp, a FastAPI RAG service, three Azure Function apps, and a PyQt desktop client.',
+      'Legal-tech SaaS for ediscovery: document intake, OCR, AI-assisted review, semantic search, and case management, sold to law firms. Core contributor across the entire platform: a Laravel webapp, a FastAPI RAG service, three Azure Function apps, and a PyQt desktop client.',
     highlights: [
       'Ship features end-to-end across 5+ services: the document pipeline runs Upload → Azure Blob → Event Grid → Durable Functions orchestration → LibreOffice/Tesseract conversion and OCR → AI enrichment workers on Service Bus.',
       'Designed and built a two-tier RBAC system: firm-level access plus per-case ACLs, with custom Laravel middleware, policies, and a centralized authorization service.',
-      'Rebuilt the desktop uploader to stream directly to Azure Blob with chunked resume and mid-upload SAS refresh — multi-hour evidence uploads now survive network drops and sleep.',
+      'Rebuilt the desktop uploader to stream directly to Azure Blob with chunked resume and mid-upload SAS refresh, so multi-hour evidence uploads survive network drops and sleep.',
       'Drive feature scoping directly with law-firm stakeholders in weekly working sessions, then translate it into shipped work.',
     ],
     tech: ['Laravel', 'FastAPI', 'Azure Functions', 'PostgreSQL + pgvector', 'LangChain', 'OpenAI', 'Service Bus', 'Event Grid'],
@@ -43,7 +43,7 @@ const engagements: Engagement[] = [
   {
     company: 'Wasatch Global Investors',
     role: 'Software Engineer (Contract)',
-    date: 'Oct 2025 — Present',
+    date: 'Oct 2025 – Present',
     summary:
       'Investment-management firm. I own dev work on the public website and internal tooling: a .NET Web API serving fund performance data to a custom WordPress theme, plus internal apps on Azure.',
     highlights: [
@@ -56,7 +56,7 @@ const engagements: Engagement[] = [
   {
     company: 'DSD Laboratories',
     role: 'Full Stack Engineer',
-    date: 'May 2026 — Present',
+    date: 'May 2026 – Present',
     summary:
       'Full-time engineering for a defense-sector software firm, building and deploying Laravel applications across both commercial Azure and GCC High (US Government) clouds.',
     highlights: [
@@ -71,7 +71,7 @@ const earlier: CompactEntry[] = [
   {
     company: 'Aabo Home',
     role: 'Software Engineer',
-    date: 'Jul — Oct 2025',
+    date: 'Jul – Oct 2025',
     summary:
       'Architected an internal OAuth 2.0 authentication server from scratch with Laravel Passport, centralizing auth across multiple third-party services.',
     tech: ['Laravel', 'OAuth 2.0', 'Postgres'],
@@ -79,7 +79,7 @@ const earlier: CompactEntry[] = [
   {
     company: 'Adobe',
     role: 'Software Engineer Intern',
-    date: 'Mar — Jun 2025',
+    date: 'Mar – Jun 2025',
     summary:
       'Built an internal developer tool for managing Workfront instances, with integrations into Adobe IAM, Okta, and internal services. Architected the system design and mentored coworkers.',
     tech: ['Node', 'React', 'Okta', 'IAM'],
@@ -87,7 +87,7 @@ const earlier: CompactEntry[] = [
   {
     company: 'Firefly Events',
     role: 'Full Stack Developer Intern',
-    date: 'Jan — Mar 2025',
+    date: 'Jan – Mar 2025',
     summary:
       'Built a venue rental management app with an end-to-end Stripe reservation and payment flow.',
     tech: ['Next.js', 'Prisma', 'MongoDB', 'Stripe'],
@@ -159,10 +159,10 @@ export default function Home() {
               I build <span className="gradient-text">backend, cloud, and AI systems</span> that run in production.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted">
-              Polyglot full-stack engineer. Right now that means a multi-tenant
+              Full-stack engineer. Right now that means a multi-tenant
               legal-tech platform, fund-data infrastructure for an investment
-              firm, and government-cloud deployments — shipped end-to-end, from
-              schema to UI to infra.
+              firm, and government-cloud deployments, all shipped end-to-end
+              from schema to UI to infra.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a href="#work" className="btn btn-primary">

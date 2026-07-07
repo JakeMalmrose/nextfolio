@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Jake Malmrose | Software Engineer",
   description:
-    "Jake Malmrose — full-stack engineer building backend, cloud, and AI systems. Laravel, FastAPI, .NET, React, and Azure, shipped end-to-end.",
+    "Jake Malmrose: full-stack engineer building backend, cloud, and AI systems. Laravel, FastAPI, .NET, React, and Azure, shipped end-to-end.",
 };
 
 export default function RootLayout({
@@ -55,7 +55,7 @@ export default function RootLayout({
               </a>
               <span
                 className="pill-disabled font-mono text-xs"
-                title="OpenWebUI instance — temporarily offline, coming back soon"
+                title="OpenWebUI instance, temporarily offline. Coming back soon."
               >
                 ai studio · soon
               </span>

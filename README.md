@@ -2,7 +2,7 @@
 
 [![Deploy Status](https://img.shields.io/github/actions/workflow/status/JakeMalmrose/nextfolio/deploy.yml?branch=master&label=Deployment&style=flat-square)](https://github.com/JakeMalmrose/nextfolio/actions/workflows/deploy.yml)
 
-Jake Malmrose's personal portfolio — a one-page site covering current work, personal projects, and skills, plus a web resume.
+Jake Malmrose's personal portfolio: a one-page site covering current work, personal projects, and skills, plus a web resume.
 
 **Live:** [https://malmrose.com/](https://malmrose.com/)
 
@@ -10,9 +10,9 @@ Jake Malmrose's personal portfolio — a one-page site covering current work, pe
 
 ## Pages
 
-*   **/** — one-page portfolio: hero, current work (MeritsAI, Wasatch Global Investors, DSD Laboratories), earlier roles, personal projects (Draupforge, NewsBites, homelab), skills, contact.
-*   **/resume** — web resume with a downloadable copy.
-*   **/timetracker** — private contract-hours tracker (auth + Postgres); intentionally unlinked from the nav.
+*   **/**: one-page portfolio: hero, current work (MeritsAI, Wasatch Global Investors, DSD Laboratories), earlier roles, personal projects (Draupforge, NewsBites, homelab), skills, contact.
+*   **/resume**: web resume with a downloadable copy.
+*   **/timetracker**: private contract-hours tracker (auth + Postgres); intentionally unlinked from the nav.
 
 ## Tech Stack
 
