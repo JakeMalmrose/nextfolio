@@ -48,17 +48,6 @@ const experiences: Experience[] = [
   },
   {
     title: 'Software Engineer (Contract)',
-    company: 'MeritsAI',
-    date: 'Oct 2025 – Present',
-    bullets: [
-      'Core contributor across a multi-tenant ediscovery SaaS platform spanning a Laravel 10 webapp, FastAPI RAG service, three Azure Function apps, and a PyQt desktop client; ship features end-to-end across 5+ services.',
-      'Architected the document ingestion pipeline using Azure Blob, Event Grid, Service Bus, and Durable Functions, integrating LibreOffice conversion, Tesseract OCR, and handwriting detection feeding AI enrichment workers on OpenAI + BAML.',
-      'Designed and implemented a two-tier RBAC system (firm-level + per-case ACL) with custom Laravel middleware, policies, and a centralized authorization service across multiple role types.',
-      'Drive feature scoping directly with law-firm stakeholders in weekly working sessions; translate requirements into shipped features across the full stack.',
-    ],
-  },
-  {
-    title: 'Software Engineer (Contract)',
     company: 'Wasatch Global Investors',
     location: 'Salt Lake City, UT',
     date: 'Oct 2025 – Present',
@@ -66,6 +55,17 @@ const experiences: Experience[] = [
       'Built an internal Client Agreement Tracker on Azure Static Web Apps with Entra ID auth, Key Vault, an Azure Function backend, and a SharePoint poller.',
       'Develop and maintain a .NET Framework 4.7.2 Web API 2 backend (Dapper ORM, repository pattern, Unity DI) serving fund performance, holdings, and characteristics data to a custom WordPress PHP theme.',
       'Built a React 18 + TypeScript SPA for digitizing DuPont financial review sheets, backed by a separate .NET Core 6 API with Azure AD OIDC authentication.',
+    ],
+  },
+  {
+    title: 'Software Engineer (Contract)',
+    company: 'MeritsAI',
+    date: 'Oct 2025 – Present',
+    bullets: [
+      'Core contributor across a multi-tenant ediscovery SaaS platform spanning a Laravel 10 webapp, FastAPI RAG service, three Azure Function apps, and a PyQt desktop client; ship features end-to-end across 5+ services.',
+      'Architected the document ingestion pipeline using Azure Blob, Event Grid, Service Bus, and Durable Functions, integrating LibreOffice conversion, Tesseract OCR, and handwriting detection feeding AI enrichment workers on OpenAI + BAML.',
+      'Designed and implemented a two-tier RBAC system (firm-level + per-case ACL) with custom Laravel middleware, policies, and a centralized authorization service across multiple role types.',
+      'Drive feature scoping directly with law-firm stakeholders in weekly working sessions; translate requirements into shipped features across the full stack.',
     ],
   },
   {

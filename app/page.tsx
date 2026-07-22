@@ -29,18 +29,16 @@ interface PersonalProject {
 
 const engagements: Engagement[] = [
   {
-    company: 'MeritsAI',
-    role: 'Software Engineer (Contract)',
-    date: 'Oct 2025 – Present',
+    company: 'DSD Laboratories',
+    role: 'Full Stack Engineer',
+    date: 'May 2026 – Present',
     summary:
-      'Legal-tech SaaS for ediscovery: document intake, OCR, AI-assisted review, semantic search, and case management, sold to law firms. Core contributor across the entire platform: a Laravel webapp, a FastAPI RAG service, three Azure Function apps, and a PyQt desktop client.',
+      'Full-time engineering for a defense-sector software firm, building and deploying Laravel applications across both commercial Azure and GCC High (US Government) clouds.',
     highlights: [
-      'Ship features end-to-end across 5+ services: the document pipeline runs Upload → Azure Blob → Event Grid → Durable Functions orchestration → LibreOffice/Tesseract conversion and OCR → AI enrichment workers on Service Bus.',
-      'Designed and built a two-tier RBAC system: firm-level access plus per-case ACLs, with custom Laravel middleware, policies, and a centralized authorization service.',
-      'Rebuilt the desktop uploader to stream directly to Azure Blob with chunked resume and mid-upload SAS refresh, so multi-hour evidence uploads survive network drops and sleep.',
-      'Drive feature scoping directly with law-firm stakeholders in weekly working sessions, then translate it into shipped work.',
+      'Built GitLab CI/CD pipelines deploying Laravel apps to Azure App Service in both commercial and GCC High clouds, with separate dev/prod environments and per-environment config.',
+      'Built the corporate site from scratch (Laravel, Tailwind, Vite), wiring public lead-capture forms cross-app into an internal recruiting database with Cloudflare Turnstile bot protection.',
     ],
-    tech: ['Laravel', 'FastAPI', 'Azure Functions', 'PostgreSQL + pgvector', 'LangChain', 'OpenAI', 'Service Bus', 'Event Grid'],
+    tech: ['Laravel', 'GitLab CI/CD', 'Azure App Service', 'GCC High', 'Tailwind', 'Vite'],
   },
   {
     company: 'Wasatch Global Investors',
@@ -56,16 +54,18 @@ const engagements: Engagement[] = [
     tech: ['.NET', 'React', 'TypeScript', 'Azure', 'WordPress', 'Dapper', 'Entra ID'],
   },
   {
-    company: 'DSD Laboratories',
-    role: 'Full Stack Engineer',
-    date: 'May 2026 – Present',
+    company: 'MeritsAI',
+    role: 'Software Engineer (Contract)',
+    date: 'Oct 2025 – Present',
     summary:
-      'Full-time engineering for a defense-sector software firm, building and deploying Laravel applications across both commercial Azure and GCC High (US Government) clouds.',
+      'Legal-tech SaaS for ediscovery: document intake, OCR, AI-assisted review, semantic search, and case management, sold to law firms. Core contributor across the entire platform: a Laravel webapp, a FastAPI RAG service, three Azure Function apps, and a PyQt desktop client.',
     highlights: [
-      'Built GitLab CI/CD pipelines deploying Laravel apps to Azure App Service in both commercial and GCC High clouds, with separate dev/prod environments and per-environment config.',
-      'Built the corporate site from scratch (Laravel, Tailwind, Vite), wiring public lead-capture forms cross-app into an internal recruiting database with Cloudflare Turnstile bot protection.',
+      'Ship features end-to-end across 5+ services: the document pipeline runs Upload → Azure Blob → Event Grid → Durable Functions orchestration → LibreOffice/Tesseract conversion and OCR → AI enrichment workers on Service Bus.',
+      'Designed and built a two-tier RBAC system: firm-level access plus per-case ACLs, with custom Laravel middleware, policies, and a centralized authorization service.',
+      'Rebuilt the desktop uploader to stream directly to Azure Blob with chunked resume and mid-upload SAS refresh, so multi-hour evidence uploads survive network drops and sleep.',
+      'Drive feature scoping directly with law-firm stakeholders in weekly working sessions, then translate it into shipped work.',
     ],
-    tech: ['Laravel', 'GitLab CI/CD', 'Azure App Service', 'GCC High', 'Tailwind', 'Vite'],
+    tech: ['Laravel', 'FastAPI', 'Azure Functions', 'PostgreSQL + pgvector', 'LangChain', 'OpenAI', 'Service Bus', 'Event Grid'],
   },
 ];
 
@@ -213,9 +213,9 @@ export default function Home() {
               I build <span className="gradient-text">backend, cloud, and AI systems</span> that run in production.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted">
-              Full-stack engineer. Right now that means a multi-tenant
-              legal-tech platform, fund-data infrastructure for an investment
-              firm, and government-cloud deployments, all shipped end-to-end
+              Full-stack engineer. Right now that means government-cloud
+              deployments, fund-data infrastructure for an investment firm,
+              and a multi-tenant legal-tech platform, all shipped end-to-end
               from schema to UI to infra.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -243,13 +243,13 @@ export default function Home() {
               </p>
               <p className="pl-4">Laravel → Azure GCC High</p>
               <p className="mt-1">
-                <span className="text-foreground">MeritsAI</span> · contract
-              </p>
-              <p className="pl-4">ediscovery platform, 5+ services</p>
-              <p className="mt-1">
                 <span className="text-foreground">Wasatch Global</span> · contract
               </p>
               <p className="pl-4">.NET fund-data APIs + internal apps</p>
+              <p className="mt-1">
+                <span className="text-foreground">MeritsAI</span> · contract
+              </p>
+              <p className="pl-4">ediscovery platform, 5+ services</p>
               <p className="mt-3">
                 <span className="text-primary">$</span> <span className="animate-pulse">▊</span>
               </p>
