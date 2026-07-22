@@ -43,4 +43,15 @@ next-env.d.ts
 # claude knowledge file
 CLAUDE_KNOWLEDGE.md
 
+# personal photos: only the named set used by the homepage life section
+/public/personal/*
+!/public/personal/.gitkeep
+!/public/personal/romeo-jasper.jpg
+!/public/personal/ponyo.jpg
+!/public/personal/new-zealand.jpg
+!/public/personal/linux-conference.jpg
+!/public/personal/linux-kid.jpg
+!/public/personal/wedding.jpg
+!/public/personal/me.jpg
+
 /app/generated/prisma

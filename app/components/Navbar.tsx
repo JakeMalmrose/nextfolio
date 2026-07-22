@@ -17,6 +17,9 @@ const Navbar = () => {
           <Link href="/#projects" className="nav-link hidden sm:inline">
             Projects
           </Link>
+          <Link href="/#life" className="nav-link hidden sm:inline">
+            Life
+          </Link>
           <Link href="/resume" className="nav-link">
             Resume
           </Link>

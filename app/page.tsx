@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import Link from 'next/link';
 
 interface Engagement {
@@ -124,6 +126,54 @@ const projects: PersonalProject[] = [
   },
 ];
 
+interface LifePhoto {
+  file: string;
+  alt: string;
+  caption: string;
+}
+
+// Drop files with these names into public/personal/ and they appear on the
+// next deploy; anything missing renders as a placeholder tile.
+const lifePhotos: LifePhoto[] = [
+  {
+    file: 'romeo-jasper.jpg',
+    alt: 'Romeo and Jasper, two cats',
+    caption: 'Romeo & Jasper. Hobbies: eating, waiting to eat.',
+  },
+  {
+    file: 'ponyo.jpg',
+    alt: 'Ponyo, a standard poodle',
+    caption: 'Ponyo. Standard poodle, too smart for her own good.',
+  },
+  {
+    file: 'new-zealand.jpg',
+    alt: 'New Zealand, seen from the camper years',
+    caption: 'New Zealand, somewhere between the top of the North Island and the bottom of the South.',
+  },
+  {
+    file: 'linux-conference.jpg',
+    alt: 'Jake and his wife at a Linux conference booth',
+    caption: 'My wife and me at a Linux conference, back when my parents built Linux PCs for a living.',
+  },
+  {
+    file: 'linux-kid.jpg',
+    alt: 'Jake as a young kid at a Linux conference',
+    caption: 'Same conference circuit, much earlier.',
+  },
+  {
+    file: 'wedding.jpg',
+    alt: 'Wedding photo',
+    caption: 'High school sweethearts, eventually.',
+  },
+  {
+    file: 'me.jpg',
+    alt: 'Jake Malmrose',
+    caption: 'Me, more recently.',
+  },
+];
+
+const personalDir = path.join(process.cwd(), 'public', 'personal');
+
 const skillGroups: { name: string; skills: string[] }[] = [
   {
     name: 'Languages',
@@ -148,6 +198,10 @@ const skillGroups: { name: string; skills: string[] }[] = [
 ];
 
 export default function Home() {
+  const availablePhotos = new Set(
+    lifePhotos.filter((p) => fs.existsSync(path.join(personalDir, p.file))).map((p) => p.file)
+  );
+
   return (
     <div>
       {/* Hero */}
@@ -321,6 +375,99 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Life */}
+      <section id="life" className="scroll-mt-20 border-b border-line">
+        <div className="container py-20">
+          <p className="section-label mb-2">life</p>
+          <h2 className="mb-10 text-3xl font-bold">Off the clock</h2>
+
+          <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-start">
+            <div className="flex max-w-3xl flex-col gap-4 text-muted">
+              <p>
+                Born in Texas. Raised in California, then Utah, then New
+                Zealand, where my parents drove us in a camper from the top of
+                the North Island to the bottom of the South while I did school
+                from a laptop in the back. Remote work stopped being scary
+                around age ten.
+              </p>
+              <p>
+                The tech thing is hereditary: my parents ran a Linux PC
+                building business, so I grew up on conference expo floors
+                before I could see over the booths.
+              </p>
+              <p>
+                Eventually I settled in Salt Lake City for Neumont and stayed.
+                I married my high school sweetheart, we filled the house with
+                animals, and I automated everything in it that would hold
+                still. Home Assistant runs the lights, the cameras, and the
+                server that is rendering this page.
+              </p>
+            </div>
+
+            <div className="terminal">
+              <div className="terminal-bar">
+                <span className="terminal-dot" />
+                <span className="terminal-dot" />
+                <span className="terminal-dot" />
+              </div>
+              <div className="p-5 text-muted">
+                <p>
+                  <span className="text-primary">$</span> jake --off-duty
+                </p>
+                <p className="mt-2">
+                  <span className="text-foreground">wife</span> · high school sweetheart
+                </p>
+                <p>
+                  <span className="text-foreground">cats</span> · Romeo, Jasper{' '}
+                  <span className="opacity-60"># gluttons</span>
+                </p>
+                <p>
+                  <span className="text-foreground">dog</span> · Ponyo, standard poodle{' '}
+                  <span className="opacity-60"># menace</span>
+                </p>
+                <p>
+                  <span className="text-foreground">house</span> · runs on Home Assistant
+                </p>
+                <p className="mt-2">
+                  <span className="text-primary">$</span> jake --hobbies
+                </p>
+                <p className="mt-1">path-of-exile <span className="text-foreground">(running)</span></p>
+                <p className="opacity-60">error: no other hobbies found</p>
+                <p className="mt-3">
+                  <span className="text-primary">$</span> <span className="animate-pulse">▊</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="mb-6 mt-14 font-mono text-sm uppercase tracking-widest text-muted">
+            Evidence
+          </h3>
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {lifePhotos.map((photo) => (
+              <figure key={photo.file} className="flex flex-col gap-2">
+                {availablePhotos.has(photo.file) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`/personal/${photo.file}`}
+                    alt={photo.alt}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full rounded-xl border border-line object-cover"
+                  />
+                ) : (
+                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-xl border border-dashed border-line bg-background-paper">
+                    <span className="font-mono text-xs text-muted opacity-70">photo incoming</span>
+                  </div>
+                )}
+                <figcaption className="font-mono text-xs leading-relaxed text-muted">
+                  {photo.caption}
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
