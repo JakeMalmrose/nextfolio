@@ -163,7 +163,7 @@ const lifePhotos: LifePhoto[] = [
   {
     file: 'wedding.jpg',
     alt: 'Wedding photo',
-    caption: 'From highschool sweethearts, to married.',
+    caption: 'From highschool sweethearts, to husband and wife.',
   },
   {
     file: 'me.jpg',
